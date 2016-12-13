@@ -1,0 +1,6 @@
+{
+// connection à la base de données
+    mainBase: {
+        name: "mongodb://localhost:27017/myproject"
+    }
+}
