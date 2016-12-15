@@ -6,3 +6,6 @@ node_modules
 client/node_modules
 
 .git
+
+.nyc_output
+coverage
