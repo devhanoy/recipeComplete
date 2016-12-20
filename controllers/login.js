@@ -4,6 +4,8 @@ const parse = require('co-body');
 const send = require('koa-send');
 const path = require('path');
 const Router = require('koa-router')
+const logger = require('../logger').logger
+const parser = require('co-body')
 
 function* getLogin(){
     const pathToIndex = path.join(__dirname, '..','views')
@@ -11,13 +13,11 @@ function* getLogin(){
 }
 
 function* postLogin(){
+    let body = yield parse.form(this.request)
+
+    let success = yield dao.checkUser(body.login, body.password)
+
     const pathToIndex = path.join(__dirname, '..','views')
-
-    let username = this.request.body.login;
-    let password = this.request.body.password;
-
-    let success = yield dao.checkUser(username, password)
-
     yield send(this, 'login.html', {hidden : true, root: pathToIndex})
 }
 
@@ -27,15 +27,11 @@ function* getSignin(){
 }
 
 function* postSignin(){
+    let body = yield parse.form(this.request)
+
+    let success = yield dao.insert(body.login, pasbody.password)
+
     const pathToIndex = path.join(__dirname, '..','views')
-
-    let username = this.request.body.login;
-    let password = this.request.body.password;
-
-    let success = yield dao.insert(username, password)
-
-    console.log('succes ' + success)
-
     yield send(this, 'signin.html', {hidden : true, root: pathToIndex})
 }
 
@@ -45,8 +41,4 @@ router.post('/login', postLogin)
 router.get('/signin', getSignin)
 router.post('/signin', postSignin)
 
-module.exports.getLogin = getLogin;
-module.exports.postLogin = postLogin
-module.exports.getSignin = getSignin
-module.exports.postSignin = postSignin
 module.exports.router = router
