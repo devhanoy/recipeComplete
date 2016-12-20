@@ -1,3 +1,5 @@
+"use strict";
+
 const connection = require('./baseConnection')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;

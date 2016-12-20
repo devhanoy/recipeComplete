@@ -1,3 +1,5 @@
+"use strict";
+
 const dao = require('../dao/user');
 const views = require('co-views');
 const parse = require('co-body');
