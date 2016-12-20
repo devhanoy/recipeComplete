@@ -9,9 +9,25 @@ const Router = require('koa-router')
 const koa = require('koa')
 const bodyparser = require('koa-body-parser')
 const helmet = require('koa-helmet')
+const session = require('koa-session')
 
 const path = require('path')
 const app = module.exports = koa()
+
+// necessary for session
+// app.keys = ['secret', 'key'];
+
+const CONFIG = {
+  key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
+  maxAge: 86400000, /** (number) maxAge in ms (default is 1 days) */
+  overwrite: true, /** (boolean) can overwrite or not (default true) */
+  httpOnly: true, /** (boolean) httpOnly or not (default true) */
+  signed: true /** (boolean) signed or not (default true) */
+}
+
+
+// session
+//  app.use(session(CONFIG, app))
 
 // Logger
 app.use(logger())
@@ -19,8 +35,11 @@ app.use(logger())
 // Security
 app.use(helmet())
 
+
+
 // retrieve the data passed in the requests
 app.use(bodyparser())
+
 
 // app.use(route.get('/', messages.home));
 // app.use(route.get('/messages', messages.list));
@@ -32,7 +51,18 @@ app.use(bodyparser())
 // app.use(route.get('/recipes', recipes.home));
 
 var router = new Router()
-router.get('/recipes', recipes.home)
+
+// var auth = function *(next) {
+//   console.log(this.session)
+//   if (!this.session || !this.session.user) {
+//     this.response.redirect('/login')
+//   }
+//    yield next
+// }
+
+// router.use()
+
+router.get('/recipes', /*auth,*/ recipes.home)
 router.get('/recipes/all', recipes.getAll)
 
 // router.get('/login', login.getLogin)
