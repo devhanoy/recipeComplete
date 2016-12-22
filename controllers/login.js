@@ -1,43 +1,35 @@
-"use strict";
+'use strict'
 
-const dao = require('../dao/user');
-const views = require('co-views');
-const parse = require('co-body');
-const send = require('koa-send');
-const path = require('path');
+const dao = require('../dao/user')
 const Router = require('koa-router')
 const logger = require('../logger').logger
 const parser = require('co-body')
 
-function* getLogin(){
-    const pathToIndex = path.join(__dirname, '..','views')
-    yield send(this, 'login.html', {hidden : true, root: pathToIndex})
+function* getLogin () {
+  yield this.render('login', { title: 'Login'})
 }
 
-function* postLogin(){
-    let body = yield parse.form(this.request)
+function* postLogin () {
+  let body = yield parser.form(this.request)
 
-    let success = yield dao.checkUser(body.login, body.password)
+  let success = yield dao.checkUser(body.login, body.password)
 
-    const pathToIndex = path.join(__dirname, '..','views')
-    yield send(this, 'login.html', {hidden : true, root: pathToIndex})
+  yield this.render('login', { title: 'Login'})
 }
 
-function* getSignin(){
-    const pathToIndex = path.join(__dirname, '..','views')
-    yield send(this, 'signin.html', {hidden : true, root: pathToIndex})
+function* getSignin () {
+  yield this.render('signin', { title: 'Inscription'})
 }
 
-function* postSignin(){
-    let body = yield parse.form(this.request)
+function* postSignin () {
+  let body = yield parser.form(this.request)
 
-    let success = yield dao.insert(body.login, pasbody.password)
+  let success = yield dao.insert(body.login, body.password)
 
-    const pathToIndex = path.join(__dirname, '..','views')
-    yield send(this, 'signin.html', {hidden : true, root: pathToIndex})
+  yield this.render('signin', { title: 'Inscription'})
 }
 
-const router = new Router();
+const router = new Router()
 router.get('/login', getLogin)
 router.post('/login', postLogin)
 router.get('/signin', getSignin)

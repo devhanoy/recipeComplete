@@ -1,47 +1,46 @@
-"use strict";
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const connection = require('./baseConnection')
 
-
 const blogSchema = new Schema({
-  title:  String,
+  title: String,
   author: String,
-  body:   String,
+  body: String,
   comments: [{ body: String, date: Date }],
   date: { type: Date, default: Date.now },
   hidden: Boolean,
   meta: {
     votes: Number,
-    favs:  Number
+    favs: Number
   }
-});
+})
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Blog = mongoose.model('Blog', blogSchema)
 
 let nblog = new Blog({
-    title:  'Un titre',
+  title: 'Un titre',
   author: 'JK Rowling',
-  body:   'Harry Potter à l\'école des sorciers',
+  body: 'Harry Potter à l\'école des sorciers',
   comments: [{ body: 'C\'est trop génial!!!', date: new Date() }],
   // date: { type: Date, default: Date.now },
   hidden: false,
   meta: {
     votes: 16,
-    favs:  11
+    favs: 11
   }
 })
 
-  connection.connect()
-    .then(function(){
+connection.connect()
+    .then(function () {
       return nblog.save()
     })
-    .then(function(b){
+    .then(function (b) {
       console.log(b)
-        console.log('success ;-)')
+      console.log('success ;-)')
     })
-    .catch(function(err){
+    .catch(function (err) {
       console.error(err)
-        console.log('fail :-(')
-    });
+      console.log('fail :-(')
+    })

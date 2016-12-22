@@ -1,6 +1,7 @@
 *.log
 
 .editorconfig
+lintResult.html
 
 node_modules
 

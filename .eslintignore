@@ -1,5 +1,11 @@
-node_modules/**.*
-client/node_modules/**.*
+node_modules/**/*
+.nyc_output/**/*
+coverage/**/*
+
 **/*.html
 **/*.json
 **/*.log
+webpack.config.js
+
+public/scripts/styles/vendor/**/*
+public/scripts/jsx/**/*

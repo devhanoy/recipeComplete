@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import Immutable from 'immutable'
@@ -10,26 +10,26 @@ import {RecipeResumeList} from './component/recipeResumesList'
 import {addRecipe} from './actions/recipesActions'
 import {mainReducer} from './reducers/recipesReducers'
 
-const steps = [{name : 'préparer'}, {name: 'faire'}]
+const steps = [{name: 'préparer'}, {name: 'faire'}]
 
 const completeRecipe = {
-	title : 'first recipe',
-	category: 'category',
-	products: [
+  title: 'first recipe',
+  category: 'category',
+  products: [
 		{name: 'banana', quantity: 12, unit: 'u'},
 		{name: 'chocolate', quantity: 100, unit: 'g'}
-	],
-	steps
+  ],
+  steps
 }
 
 const completeRecipe2 = {
-	title : 'second recipe',
-	category: 'category 2',
-	products: [
+  title: 'second recipe',
+  category: 'category 2',
+  products: [
 		{name: 'caramel', quantity: 15, unit: 'u'},
 		{name: 'fraise', quantity: 150, unit: 'g'}
-	],
-	steps: [...steps, 'manger']
+  ],
+  steps: [...steps, 'manger']
 }
 
 console.log('toto')
@@ -40,39 +40,36 @@ fetch('/recipes/all')
 
 // startBinding([completeRecipe, completeRecipe2])
 
-function startBinding(rec){
+function startBinding (rec) {
+  const recipes = Immutable.fromJS(rec)
 
-	const recipes = Immutable.fromJS(rec)
+  function reduce (state = {}, action) {
+    return state
+  }
 
-	function reduce(state = {}, action){
-		return state
-	}
+  var store = createStore(mainReducer, {recipes})
 
-	var store = createStore(mainReducer, {recipes})
+  const mapStateToProps = (state) => {
+    return {
+      recipes: state.recipes
+    }
+  }
 
-	const mapStateToProps = (state) => {
-		return {
-			recipes: state.recipes
-		}
-	}
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      onAddRecipe2: createRecipe => event => dispatch(addRecipe(createRecipe()))
+    }
+  }
 
-	const mapDispatchToProps = (dispatch) => {
-		return {
-			onAddRecipe2: createRecipe => event => dispatch(addRecipe(createRecipe()))
-		}
-	}
-
-	var ConnectedResumes = connect(
+  var ConnectedResumes = connect(
 		mapStateToProps,
 		mapDispatchToProps
 	)(RecipeResumeList)
 
-
-	ReactDOM.render(
+  ReactDOM.render(
 		<Provider store={store}>
 		<ConnectedResumes />
 		</Provider>,
 		document.getElementById('root')
-	);
-
+	)
 }

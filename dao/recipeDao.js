@@ -1,20 +1,19 @@
-"use strict";
+'use strict'
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const connection = require('./baseConnection')
 
 const recipeSchema = new Schema({
-  title:  String,
+  title: String,
   products: [{name: String, quantity: Number, unit: String}],
-  steps:   [String],
-  category: String,
-});
+  steps: [String],
+  category: String
+})
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema)
 
-
-module.exports.Recipe = Recipe;
+module.exports.Recipe = Recipe
 module.exports.findAll = () => connection.connect().then(() => Recipe.find())
 
 // let nRecipe = new Recipe({

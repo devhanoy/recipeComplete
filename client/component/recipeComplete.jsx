@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export const RecipeResume = (props) => (
 	 <div>
@@ -6,12 +6,12 @@ export const RecipeResume = (props) => (
             <li class="message">{ props.title }</li>
             <li class="message">Produits :
                 <ul>
-					{props.products.map((product) =>  <li>{ product.name } : { product.quantity } { product.unit }</li>) }
+					{props.products.map((product) => <li>{ product.name } : { product.quantity } { product.unit }</li>) }
                 </ul>
             </li>
             <li class="message">Etapes
                 <ul>
-					{props.steps.map((step) =>  <li>{step.name}</li>) }
+					{props.steps.map((step) => <li>{step.name}</li>) }
 				</ul>
             </li>
             <li class="message">{ props.category }</li>

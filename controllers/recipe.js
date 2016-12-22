@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
-const dao = require('../dao/recipeDao');
-const views = require('co-views');
-const send = require('koa-send');
-const path = require('path');
+const dao = require('../dao/recipeDao')
+const send = require('koa-send')
+const Router = require('koa-router')
 
-const render = views(__dirname + '/../views', {
-  map: { html: 'swig' }
-});
-
-module.exports.home = function *home(next) {
-  const pathToIndex = path.join(__dirname, '..','views')
-    let recipes = yield send(this, 'index2.html', {hidden : true, root: pathToIndex})
-};
-
-module.exports.getAll = function *getAll(){
+function *getAll () {
   this.body = yield dao.findAll()
 }
+
+function *home (next) {
+  yield this.render('index2', { title: 'Recettes'})
+};
+
+const router = new Router()
+router.get('/', home)
+router.get('/all', getAll)
+
+module.exports.router = router
