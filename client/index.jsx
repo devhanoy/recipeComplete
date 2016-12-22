@@ -32,6 +32,8 @@ const completeRecipe2 = {
 	steps: [...steps, 'manger']
 }
 
+console.log('toto')
+
 fetch('/recipes/all')
 .then(response => response.json())
 .then(json => startBinding(json))
