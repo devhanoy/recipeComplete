@@ -6,7 +6,7 @@ const logger = require('../logger').logger
 const parser = require('co-body')
 
 function* getLogin () {
-  yield this.render('login', { title: 'Login'})
+  yield this.render('login', { title: 'Login' })
 }
 
 function* postLogin () {
@@ -14,19 +14,25 @@ function* postLogin () {
 
   let success = yield dao.checkUser(body.login, body.password)
 
-  yield this.render('login', { title: 'Login'})
+  const verb = success ? 'successed' : 'failed'
+  logger.log('info', `User ${body.login} ${verb} to log in`)
+
+  yield this.render('login', { title: 'Login' })
 }
 
 function* getSignin () {
-  yield this.render('signin', { title: 'Inscription'})
+  yield this.render('signin', { title: 'Inscription' })
 }
 
 function* postSignin () {
   let body = yield parser.form(this.request)
 
   let success = yield dao.insert(body.login, body.password)
+  if (success) {
+    logger.log('info', `User ${body.login} has subscribed`)
+  }
 
-  yield this.render('signin', { title: 'Inscription'})
+  yield this.render('signin', { title: 'Inscription' })
 }
 
 const router = new Router()

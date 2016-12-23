@@ -9,6 +9,7 @@ const helmet = require('koa-helmet')
 const session = require('koa-session')
 const hbs = require('koa-hbs')
 const config = require('config')
+const myLogger = require('./logger').logger
 
 const path = require('path')
 const app = module.exports = koa()
@@ -51,5 +52,5 @@ app.use(compress())
 
 if (!module.parent) {
   app.listen(3000)
-  console.log('listening on port 3000')
+  myLogger.log('info', 'listening on port 3000')
 }

@@ -1,7 +1,5 @@
-import React from 'react'
-
 export const RecipeResume = ({title, category}) => (
-	 <div>
+    <div>
         <h4>{ title }</h4>
         <span>{category}</span>
     </div>

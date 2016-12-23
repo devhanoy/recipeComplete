@@ -5,6 +5,9 @@ coverage/**/*
 **/*.html
 **/*.json
 **/*.log
+**/*.hbs
+**/*.css
+**/*.json5
 webpack.config.js
 
 public/scripts/styles/vendor/**/*

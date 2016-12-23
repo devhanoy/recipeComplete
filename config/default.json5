@@ -11,4 +11,5 @@
         signed: true /** (boolean) signed or not (default true) */
     },
     appsKeys : ['secret', 'key'],
+    logFilePath : ['logs', 'somefile.log']
 }

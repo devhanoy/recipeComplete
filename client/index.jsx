@@ -1,38 +1,33 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import Immutable from 'immutable'
 
-import {Steps} from './component/recipeSteps'
-import {RecipeResume} from './component/recipeResume'
 import {RecipeResumeList} from './component/recipeResumesList'
 import {addRecipe} from './actions/recipesActions'
 import {mainReducer} from './reducers/recipesReducers'
 
-const steps = [{name: 'préparer'}, {name: 'faire'}]
+// const steps = [{name: 'préparer'}, {name: 'faire'}]
 
-const completeRecipe = {
-  title: 'first recipe',
-  category: 'category',
-  products: [
-		{name: 'banana', quantity: 12, unit: 'u'},
-		{name: 'chocolate', quantity: 100, unit: 'g'}
-  ],
-  steps
-}
+// const completeRecipe = {
+//   title: 'first recipe',
+//   category: 'category',
+//   products: [
+//     {name: 'banana', quantity: 12, unit: 'u'},
+//     {name: 'chocolate', quantity: 100, unit: 'g'}
+//   ],
+//   steps
+// }
 
-const completeRecipe2 = {
-  title: 'second recipe',
-  category: 'category 2',
-  products: [
-		{name: 'caramel', quantity: 15, unit: 'u'},
-		{name: 'fraise', quantity: 150, unit: 'g'}
-  ],
-  steps: [...steps, 'manger']
-}
-
-console.log('toto')
+// const completeRecipe2 = {
+//   title: 'second recipe',
+//   category: 'category 2',
+//   products: [
+//     {name: 'caramel', quantity: 15, unit: 'u'},
+//     {name: 'fraise', quantity: 150, unit: 'g'}
+//   ],
+//   steps: [...steps, 'manger']
+// }
 
 fetch('/recipes/all')
 .then(response => response.json())
@@ -43,9 +38,9 @@ fetch('/recipes/all')
 function startBinding (rec) {
   const recipes = Immutable.fromJS(rec)
 
-  function reduce (state = {}, action) {
-    return state
-  }
+  // function reduce (state = {}, action) {
+  //   return state
+  // }
 
   var store = createStore(mainReducer, {recipes})
 
@@ -61,15 +56,17 @@ function startBinding (rec) {
     }
   }
 
-  var ConnectedResumes = connect(
-		mapStateToProps,
-		mapDispatchToProps
-	)(RecipeResumeList)
+/* eslint-disable */
+  const ConnectedResumes = connect(
+    mapStateToProps,
+    mapDispatchToProps
+    )(RecipeResumeList)
+/* eslint-enable */
 
   ReactDOM.render(
-		<Provider store={store}>
-		<ConnectedResumes />
-		</Provider>,
-		document.getElementById('root')
-	)
+    <Provider store={store}>
+    <ConnectedResumes />
+    </Provider>,
+    document.getElementById('root')
+    )
 }

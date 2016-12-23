@@ -1,9 +1,6 @@
 import React from 'react'
 import Immutable from 'immutable'
 
-import {RecipeProductListForm} from './recipeProductsListForm'
-import {RecipeStepList} from './recipeStepListForm'
-
 export class RecipeAddForm extends React.Component {
   constructor (props) {
     super(props)

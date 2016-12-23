@@ -3,16 +3,14 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const config = require('config')
-
-// console.log(config)
+const logger = require('../logger').logger
 
 // Connection URL
 const url = config.get('mainBase').name
-// 'mongodb://localhost:27017/myproject';
 
 const db = mongoose.connection
 
-db.on('error', console.error.bind(console, 'connection error:'))
+db.on('error', err => logger.log('error', 'connection error', err))
 
 var openConnection
 

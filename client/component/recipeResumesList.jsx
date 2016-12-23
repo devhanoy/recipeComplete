@@ -1,7 +1,3 @@
-import React from 'react'
-import {RecipeResume} from './recipeResume'
-import {RecipeAddForm} from './recipeAddForm'
-
 export const RecipeResumeList = ({recipes, onAddRecipe, onAddRecipe2}) => (
     <div>
         {recipes.map(recipe =>
