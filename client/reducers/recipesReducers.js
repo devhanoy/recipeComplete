@@ -1,6 +1,6 @@
 import { ADD_RECIPE } from '../actions/actionTypes'
 
-export function mainReducer (state, action) {
+export function recipes (state = {}, action) {
   var result
   switch (action.type) {
     case ADD_RECIPE:

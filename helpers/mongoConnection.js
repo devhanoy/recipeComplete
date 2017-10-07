@@ -3,7 +3,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const config = require('config')
-const logger = require('../logger').logger
+const logger = require('../helpers/logger').logger
 
 // Connection URL
 const url = config.get('mainBase').name

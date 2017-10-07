@@ -2,8 +2,7 @@ const winston = require('winston')
 const path = require('path')
 const config = require('config')
 
-let logFilePath = config.get('logFilePath')
-logFilePath.unshift(__dirname)
+const logFilePath = [__dirname, '..', ...config.get('logFilePath')]
 
 const logger = new (winston.Logger)({
   transports: [

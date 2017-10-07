@@ -2,7 +2,17 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const connection = require('./baseConnection')
+const ObjectId = Schema.Types.ObjectId;
+// const connection = require('./baseConnection')
+
+const productSchema = new Schema({
+  productId : ObjectId,
+  unitId : ObjectId,
+  quantity : Number
+},
+{
+  _id : false
+})
 
 const recipeSchema = new Schema({
   title: String,
@@ -13,8 +23,16 @@ const recipeSchema = new Schema({
 
 const Recipe = mongoose.model('Recipe', recipeSchema)
 
-module.exports.Recipe = Recipe
-module.exports.findAll = () => connection.connect().then(() => Recipe.find())
+module.exports = Recipe
+
+// module.exports.Recipe = Recipe
+// module.exports.findAll = () => connection.connect().then(() => Recipe.find())
+// module.exports.insert = (recipe) => connection.connect().then(() => {
+//   const newRecipe = new Recipe(recipe)
+//   return newRecipe.save();
+// })
+// module.exports.findOne = (search) => connection.connect().then(() => Recipe.findOne(search))
+// module.exports.findById = (id) => connection.connect().then(() => Recipe.findOne({ _id : id }))
 
 // let nRecipe = new Recipe({
 //     title:  'Lasagnes',

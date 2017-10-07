@@ -1,11 +1,11 @@
 'use strict'
 
-const connection = require('./baseConnection')
+const connection = require('../helpers/mongoConnection')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const crypto = require('crypto-promise')
 const nodeCrypto = require('crypto')
-const logger = require('../logger').logger
+const logger = require('../helpers/logger').logger
 
 const bytesSize = 32
 // const hash = crypto.createHash("sha512")

@@ -3,16 +3,19 @@
 const compress = require('koa-compress')
 const logger = require('koa-logger')
 const serve = require('koa-static')
-const router = require('./routes').router
+const router = require('./helpers/routes').router
 const koa = require('koa')
 const helmet = require('koa-helmet')
 const session = require('koa-session')
 const hbs = require('koa-hbs')
 const config = require('config')
-const myLogger = require('./logger').logger
+const myLogger = require('./helpers/logger').logger
+const mongoConn = require('./helpers/mongoConnection')
 
 const path = require('path')
 const app = module.exports = koa()
+
+mongoConn.connect()
 
 // necessary for session
 app.keys = config.get('appsKeys')

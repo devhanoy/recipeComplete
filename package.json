@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/nyc --reporter=html ./node_modules/.bin/mocha --reporter spec",
+    "coverTest": "./node_modules/.bin/nyc --reporter=html ./node_modules/.bin/mocha --reporter spec",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "debug": "nodemon --inspect app.js",
     "lint": "./node_modules/.bin/eslint --output-file ./lintResult.html --format html --fix **/*",
     "webpack": "./node_modules/.bin/webpack"
   },
   "dependencies": {
+    "chai-http": "^3.0.0",
     "co-body": "^4.0.0",
     "config": "^1.24.0",
     "crypto-promise": "^1.0.2",
-    "immutable": "^3.8.1",
     "koa": "^1.2.4",
     "koa-compress": "^1.0.6",
     "koa-hbs": "^0.9.0",
@@ -30,6 +31,7 @@
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
     "winston": "^2.3.0"
   },
   "devDependencies": {

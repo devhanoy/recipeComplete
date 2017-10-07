@@ -1,8 +1,8 @@
 'use strict'
 
-const dao = require('../dao/user')
+const dao = require('../models/user')
 const Router = require('koa-router')
-const logger = require('../logger').logger
+const logger = require('../helpers/logger').logger
 const parser = require('co-body')
 
 function* getLogin () {

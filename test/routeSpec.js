@@ -1,5 +1,5 @@
 /* global describe, it */
-'use strict'
+/* 'use strict'
 const superagent = require('supertest')
 const app = require('../app')
 const request = superagent(app.listen())
@@ -28,3 +28,4 @@ describe.skip('Routes', () => {
     })
   })
 })
+*/

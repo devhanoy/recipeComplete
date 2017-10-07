@@ -3,9 +3,9 @@ var webpack = require('webpack')
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 
 module.exports = {
-  context: path.join(__dirname, './client/'),
+  context: path.join(__dirname, './'),
   entry: {
-    index: './index'/*,
+    index: './client/index'/*,
 		index2 : "./index2" */
   },
   output: {
