@@ -7,6 +7,13 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug nodejs",
+            "protocol": "inspector",
+            "program": "${workspaceFolder}/app.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "nodemon",
             "runtimeExecutable": "nodemon",
             "runtimeArgs": [

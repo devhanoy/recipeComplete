@@ -12,3 +12,5 @@ coverage
 
 public/scripts/jsx/*
 public/scripts/jsx/index.js
+
+mongoLaunch.cmd
