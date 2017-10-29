@@ -1,6 +1,9 @@
 import React from 'react'
 
-export function AddCategoryProductForm(props) {
+import {addCategoryProduct, categoryProductNameChange} from '../actions/categoryProductAction'
+import { connect } from 'react-redux'
+
+export function AddCategoryProductForm (props) {
   return (
     <form className="pure-form pure-form-aligned">
       <fieldset>
@@ -15,3 +18,20 @@ export function AddCategoryProductForm(props) {
   )
 }
 
+const mapStateToProps = (state) => {
+  return {
+    categoryProduct: state.categoryProductFormName
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCategoryProduct: addCategoryProduct(dispatch),
+    categoryProductNameChange: categoryProductNameChange(dispatch)
+  }
+}
+
+export const ConnectedAddCategoryProductForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(AddCategoryProductForm)
