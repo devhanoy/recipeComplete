@@ -16,7 +16,7 @@ export class RecipeCategoryProductListForm extends React.Component {
     return (
         <div>
             {this.props.categories.map(category =>
-                <div>{ category.name }</div>
+                <div key={category._id} >{ category.name }</div>
                 // <div key={category.get('id')}>
                 //     <span><label>Nom produit: </label><input type="text" value={category.name} onChange={props.change(category.id)('name')} /></span>
                 //     <br/>
