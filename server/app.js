@@ -41,7 +41,7 @@ app.use(router.routes())
     .use(router.allowedMethods())
 
 // Serve static files
-app.use(serve(path.join(__dirname, 'public')))
+app.use(serve(path.join(__dirname, '..', 'public')))
 
 // Compress
 
