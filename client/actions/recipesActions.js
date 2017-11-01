@@ -1,4 +1,4 @@
-import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE,  GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE } from './actionTypes'
+import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE } from './actionTypes'
 
 export function addRecipe (recipe) {
   return {
@@ -11,7 +11,7 @@ export function addRecipe (recipe) {
   }
 }
 
-function deleteRecipeRequest(id){
+function deleteRecipeRequest (id) {
   return {
     type: DELETE_RECIPE_REQUEST,
     payload: {
@@ -22,7 +22,7 @@ function deleteRecipeRequest(id){
   }
 }
 
-function deleteRecipeSuccess(id){
+function deleteRecipeSuccess (id) {
   return {
     type: DELETE_RECIPE_SUCCESS,
     payload: {
@@ -33,7 +33,7 @@ function deleteRecipeSuccess(id){
   }
 }
 
-function deleteRecipeFailure(error){
+function deleteRecipeFailure (error) {
   return {
     type: DELETE_RECIPE_FAILURE,
     payload: {
@@ -45,7 +45,6 @@ function deleteRecipeFailure(error){
 }
 
 export function deleteRecipe (recipeId) {
-
   return dispatch => {
     console.log('deletion begins')
     dispatch(deleteRecipeRequest(recipeId))
@@ -55,7 +54,6 @@ export function deleteRecipe (recipeId) {
             .then(recipe => dispatch(deleteRecipeSuccess(recipeId)))
             .catch(err => deleteRecipeFailure(err))
   }
-
 }
 
 // export function getRecipe (recipeId) {

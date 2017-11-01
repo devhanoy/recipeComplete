@@ -50,7 +50,7 @@ export class RecipeAddForm extends React.Component {
       unit: ''
     }
 
-    const nCPs = [...cPs,nP]
+    const nCPs = [...cPs, nP]
 
     this.setState({data: Object.assign({}, this.state.data, { products: nCPs}) })
 
@@ -66,7 +66,7 @@ export class RecipeAddForm extends React.Component {
 
   addStep (event) {
     const nSteps = [...this.state.data.steps, '']
-    this.setState( { data: Object.assign({}, this.state.data, { steps: nSteps})})
+    this.setState({ data: Object.assign({}, this.state.data, { steps: nSteps})})
   }
 
   render () {
@@ -77,7 +77,7 @@ export class RecipeAddForm extends React.Component {
                 <label>title</label>
                 <input type="text" placeholder="Titre recette" onChange={this.titleChange} value={this.state.data.title}/>
                 </div>
-                
+
                 <div className="pure-control-group">
                 <label>category</label>
                 <input type="text" placeholder="Catégorie recette" onChange={this.categoryChange} value={this.state.data.category}/>

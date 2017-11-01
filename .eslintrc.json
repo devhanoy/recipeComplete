@@ -1,8 +1,9 @@
-module.exports = {
-    "extends": "standard",
+{
+    "extends": ["standard", "plugin:react/recommended"],
     "plugins": [
         "standard",
-        "promise"
+        "promise",
+        "react"
     ],
     "env": {
         "browser": true,
@@ -14,5 +15,10 @@ module.exports = {
         "no-tabs" : 1,
         "no-console": 1,
         "no-mixed-spaces-and-tabs": 1
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        }
     }
-};
+}

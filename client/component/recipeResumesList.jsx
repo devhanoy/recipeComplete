@@ -3,7 +3,6 @@ import {RecipeResume} from './recipeResume'
 import {RecipeAddForm} from './recipeAddForm'
 import {deleteRecipe} from '../actions/recipesActions'
 
-
 export const RecipeResumeList = ({recipes, onAddRecipe, onAddRecipe2, deleteRecipe}) => (
     <div>
         {recipes.map(recipe =>
@@ -13,4 +12,4 @@ export const RecipeResumeList = ({recipes, onAddRecipe, onAddRecipe2, deleteReci
     </div>
 )
 
-// 
+//

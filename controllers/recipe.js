@@ -18,7 +18,7 @@ function *getById () {
 
 function *delById () {
   const recipeId = this.params.id
-  this.body  = yield model.findByIdAndRemove(recipeId)
+  this.body = yield model.findByIdAndRemove(recipeId)
 }
 
 const router = new Router()
