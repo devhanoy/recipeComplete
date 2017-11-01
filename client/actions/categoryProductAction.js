@@ -3,16 +3,9 @@ import {jsonPost} from '../helpers/requestHelper'
 
 import { store } from '../store-creation'
 
-var serialize = function (data) {
-  return Object.keys(data).map(function (keyName) {
-    return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
-  }).join('&')
-}
-
 export function addCategoryProduct (dispatch) {
   return () => {
     const categoryproduct = store.getState().categoryProductFormName
-    console.log(`categoryproduct: ${categoryproduct}`)
     dispatch(addCategoryProductRequest(categoryproduct))
 
     return jsonPost(`/recipes/categoryProduct/add`, {categoryproduct})

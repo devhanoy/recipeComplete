@@ -2,17 +2,17 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const ObjectId = Schema.Types.ObjectId;
+const ObjectId = Schema.Types.ObjectId
 // const connection = require('./baseConnection')
 
 const productSchema = new Schema({
-  productId : ObjectId,
-  unitId : ObjectId,
-  quantity : Number
+  productId: ObjectId,
+  unitId: ObjectId,
+  quantity: Number
 },
-{
-  _id : false
-})
+  {
+    _id: false
+  })
 
 const recipeSchema = new Schema({
   title: String,
