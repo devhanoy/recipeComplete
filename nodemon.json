@@ -1,0 +1,10 @@
+{
+    "verbose": true,
+    "ignore": [
+        "public/*",
+        "client/*",
+        "test/*",
+        "**/*.log"
+        ],
+    "delay": 2000
+}
