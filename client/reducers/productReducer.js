@@ -7,7 +7,7 @@ export function products (state = [], action) {
     case DELETE_PRODUCT_SUCCESS:
       return state.filter(p => p.id !== action.payload.product.id)
     case GET_ALL_PRODUCTS:
-      return state.payload
+      return action.payload
     default:
       return state
   }

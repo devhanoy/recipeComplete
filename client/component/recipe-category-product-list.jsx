@@ -1,13 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { getAllCategories } from '../actions/categoryProductAction'
 
 export class RecipeCategoryProductListForm extends React.Component {
 
-//   constructor (props) {
-//     super(props)
-//   }
   componentDidMount () {
     this.props.getAllCategories()
   }
@@ -17,18 +15,15 @@ export class RecipeCategoryProductListForm extends React.Component {
         <div>
             {this.props.categories.map(category =>
                 <div key={category._id} >{ category.name }</div>
-                // <div key={category.get('id')}>
-                //     <span><label>Nom produit: </label><input type="text" value={category.name} onChange={props.change(category.id)('name')} /></span>
-                //     <br/>
-                //     <span><label>Quantité: </label><input type="text" value={category.quantity} onChange={props.change(category.id)('quantity')} /></span>
-                //     <br/>
-                //     <span><label>Unité: </label><input type="text" value={category.unit} onChange={props.change(category.id)('unit')} /></span>
-                // </div>
             )}
-            {/* <button onClick={props.add}>Ajouter produit</button> */}
         </div>
     )
   }
+}
+
+RecipeCategoryProductListForm.propTypes = {
+  categories: PropTypes.array,
+  getAllCategories: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
