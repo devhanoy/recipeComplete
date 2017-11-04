@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ConnectedAddCategoryProductForm } from './component/addCategoryProduct'
 import { ConnectedRecipeCategoryProductListForm } from './component/recipe-category-product-list'
+import { ConnectedRecipeAddProduct } from './component/recipeAddProduct'
 import { Header } from './header'
 
 // import {RecipeResumeList} from './component/recipeResumesList'
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Header></Header>
         <Route exact path="/" component={ConnectedAddCategoryProductForm}/>
         <Route path="/categories" component={ConnectedRecipeCategoryProductListForm}/>
+        <Route path="/addProduct" component={ConnectedRecipeAddProduct}/>
       </div>
     </Router>
   </Provider>,

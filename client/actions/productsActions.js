@@ -1,16 +1,26 @@
-import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, GET_ALL_PRODUCTS } from './actionTypes'
+import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS,
+         DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS,
+         GET_ALL_PRODUCTS,
+        CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './actionTypes'
 import {jsonPost} from '../helpers/requestHelper'
 
 import { store } from '../store-creation'
 
-export function addProduct (product) {
-  return dispatch => {
-    dispatch(addProductRequest(product))
+export function addProduct (dispatch) {
+  return () => {
+    const state = store.getState()
+    const product = state.productFormChange
+    const categories = state.categoryProduct
 
-    return jsonPost(`/recipes/product/`, product)
+    const category = categories.find(cat => product.category === cat.name)
+    const newProduct = Object.assign({}, product, { categoryId: category._id })
+
+    dispatch(addProductRequest(newProduct))
+
+    return jsonPost(`/recipes/product/`, newProduct)
                 .then(response => response.json())
                 .then(product => dispatch(addProductSuccess(product)))
-                .catch(err => addProductFailure(err))
+                .catch(err => dispatch(addProductFailure(err)))
   }
 }
 
@@ -47,11 +57,11 @@ function addProductFailure (err) {
   }
 }
 
-export function deleteProduct (product) {
-  return dispatch => {
+export function deleteProduct (dispatch) {
+  return product => {
     dispatch(deleteProductRequest(product))
 
-    return fetch(`/recipes/product/${recipeId}`, { method: 'DELETE' })
+    return fetch(`/recipes/product/${product._id}`, { method: 'DELETE' })
                 .then(response => response.json())
                 .then(product => dispatch(deleteProductRequest(product)))
                 .catch(err => deleteProductFailure(err))
@@ -104,5 +114,23 @@ export function getAllProducts (dispatch) {
                   error: null
                 }))
     }
+  }
+}
+
+export function changeFormName (dispatch) {
+  return (newName) => {
+    dispatch({
+      type: CHANGE_FORM_PRODUCT_NAME,
+      payload: newName
+    })
+  }
+}
+
+export function changeFormCategory (dispatch) {
+  return (newCategoryName) => {
+    dispatch({
+      type: CHANGE_FORM_PRODUCT_CATEGORY,
+      payload: newCategoryName
+    })
   }
 }

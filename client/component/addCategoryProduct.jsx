@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import {addCategoryProduct, categoryProductNameChange} from '../actions/categoryProductAction'
-import { connect } from 'react-redux'
 
 export function AddCategoryProductForm (props) {
   return (
@@ -16,6 +17,12 @@ export function AddCategoryProductForm (props) {
         </fieldset>
     </form>
   )
+}
+
+AddCategoryProductForm.propTypes = {
+  categoryProduct: PropTypes.string,
+  categoryProductNameChange: PropTypes.func,
+  addCategoryProduct: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
