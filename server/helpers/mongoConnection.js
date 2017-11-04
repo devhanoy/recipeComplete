@@ -7,6 +7,7 @@ const logger = require('../helpers/logger').logger
 
 // Connection URL
 const url = config.get('mainBase').name
+const options = config.get('mainBase').options
 
 const db = mongoose.connection
 
@@ -16,7 +17,7 @@ var openConnection
 
 module.exports.connect = () => {
   if (!openConnection) {
-    openConnection = Promise.resolve(mongoose.connect(url))
+    openConnection = Promise.resolve(mongoose.connect(url, options))
   }
   return openConnection
 }

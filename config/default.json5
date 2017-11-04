@@ -1,7 +1,10 @@
 {
 // connection à la base de données
     mainBase: {
-        name: "mongodb://localhost:27017/myproject"
+        name: "mongodb://localhost:27017/myproject",
+        options: {
+            useMongoClient: true,
+        }
     },
     sessionConfig: {
         key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
