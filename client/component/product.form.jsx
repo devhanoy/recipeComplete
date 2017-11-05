@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { addProduct, changeFormCategory, changeFormName } from '../actions/productsActions'
-import { getAllCategories } from '../actions/categoryProductAction'
+import { addProduct, changeFormCategory, changeFormName } from '../actions/product.action'
+import { getAllCategories } from '../actions/category-product.action'
 
 export class RecipeAddProduct extends React.Component {
 

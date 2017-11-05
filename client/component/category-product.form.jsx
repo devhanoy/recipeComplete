@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import {addCategoryProduct, categoryProductNameChange} from '../actions/categoryProductAction'
+import {addCategoryProduct, categoryProductNameChange} from '../actions/category-product.action'
 
 export function AddCategoryProductForm (props) {
   return (

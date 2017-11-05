@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_SUCCESS, GET_ALL_PRODUCTS, CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from '../actions/actionTypes'
+import { ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_SUCCESS, GET_ALL_PRODUCTS, CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from '../actions/product.type'
 
 export function products (state = [], action) {
   switch (action.type) {

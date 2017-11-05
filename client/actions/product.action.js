@@ -1,7 +1,7 @@
 import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS,
          DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS,
          GET_ALL_PRODUCTS,
-        CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './actionTypes'
+        CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './product.type'
 import {jsonPost} from '../helpers/requestHelper'
 
 import { store } from '../store-creation'

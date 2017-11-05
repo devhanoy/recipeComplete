@@ -1,4 +1,4 @@
-import {ADD_CATEGORY_PRODUCT_SUCCESS, DELETE_CATEGORY_PRODUCT_SUCCESS, CHANGE_NAME_FORM_CATEGORY, GET_ALL_CATEGORY_PRODUCT} from '../actions/actionTypes'
+import {ADD_CATEGORY_PRODUCT_SUCCESS, DELETE_CATEGORY_PRODUCT_SUCCESS, CHANGE_NAME_FORM_CATEGORY, GET_ALL_CATEGORY_PRODUCT} from '../actions/category-product.type'
 
 export function categoryProduct (state = [], action) {
   switch (action.type) {

@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { ConnectedAddCategoryProductForm } from './component/addCategoryProduct'
-import { ConnectedRecipeCategoryProductListForm } from './component/recipe-category-product-list'
-import { ConnectedRecipeAddProduct } from './component/recipeAddProduct'
-import { ConnectedProductsList } from './component/products-list'
+import { ConnectedAddCategoryProductForm } from './component/category-product.form'
+import { ConnectedRecipeCategoryProductListForm } from './component/category-product-list'
+import { ConnectedRecipeAddProduct } from './component/product.form'
+import { ConnectedProductsList } from './component/product-list'
 import { Header } from './header'
 
 // import {RecipeResumeList} from './component/recipeResumesList'
-// import {addRecipe, deleteRecipe} from './actions/recipesActions'
 import { store } from './store-creation'
 
 ReactDOM.render(

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { getAllProducts } from '../actions/productsActions'
+import { getAllProducts } from '../actions/product.action'
 
 export class ProductsList extends React.Component {
 
