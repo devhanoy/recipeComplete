@@ -1,17 +1,22 @@
 import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS,
        DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE,
       ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP } from './recipe.type'
+import { store } from '../store-creation'
+import { jsonPost } from '../helpers/requestHelper'
 
 export function addRecipe (dispatch) {
-  const recipe = null
-  return () => dispatch({
-    type: ADD_RECIPE_REQUEST,
-    payload: {
-      newRecipe: recipe
-    },
-    meta: null,
-    error: null
-  })
+  const recipe = store.getState().recipeForm
+  return () => {
+    jsonPost('/recipes/categoryProduct/add', { recipe })
+    dispatch({
+      type: ADD_RECIPE_REQUEST,
+      payload: {
+        newRecipe: recipe
+      },
+      meta: null,
+      error: null
+    })
+  }
 }
 
 function deleteRecipeRequest (id) {

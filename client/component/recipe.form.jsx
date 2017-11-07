@@ -16,7 +16,7 @@ export class RecipeAddForm extends React.Component {
               {/* <fieldset> */}
                 <div className="pure-control-group">
                 <label>title</label>
-                <input type="text" placeholder="Titre recette" onChange={this.props.titleChange} value={this.props.title}/>
+                <input type="text" placeholder="Titre recette" onChange={event => this.props.titleChange(event.target.value)} value={this.props.title}/>
                 </div>
 
                 {/* <div className="pure-control-group">
@@ -26,8 +26,8 @@ export class RecipeAddForm extends React.Component {
 
                 <div className="pure-control-group">
                   {this.props.products.map((product, index) =>
-                    <div key={product._id}>
-                      <input type="text" value={product.name} onChange={event => this.props.productChange(event.target.value, index)} />
+                    <div key={index}>
+                      <input type="text" value={product} onChange={event => this.props.productChange(event.target.value, index)} />
                     </div>
                   )}
                 {/* <RecipeProductListForm change={this.props.productChange} products={this.state.data.products} add={this.productAdd}/> */}

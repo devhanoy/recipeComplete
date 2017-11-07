@@ -35,8 +35,8 @@ function products (state = [''], { type, payload }) {
     case ADD_RECIPE_PRODUCT:
       return [...state, '']
     case CHANGE_RECIPE_PRODUCT:
-      const { index, step } = payload
-      return [...state.slice(0, index), step, ...state.slice(index + 1)]
+      const { index, product } = payload
+      return [...state.slice(0, index), product, ...state.slice(index + 1)]
     default:
       return state
   }
