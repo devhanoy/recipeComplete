@@ -30,7 +30,7 @@ function steps (state = [], { type, payload }) {
   }
 }
 
-function products (state = [], { type, payload }) {
+function products (state = [''], { type, payload }) {
   switch (type) {
     case ADD_RECIPE_PRODUCT:
       return [...state, '']
@@ -42,7 +42,7 @@ function products (state = [], { type, payload }) {
   }
 }
 
-function name (state = [], { type, payload }) {
+function name (state = '', { type, payload }) {
   switch (type) {
     case CHANGE_RECIPE_NAME:
       return payload

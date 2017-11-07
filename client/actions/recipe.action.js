@@ -2,15 +2,16 @@ import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS,
        DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE,
       ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP } from './recipe.type'
 
-export function addRecipe (recipe) {
-  return {
+export function addRecipe (dispatch) {
+  const recipe = null
+  return () => dispatch({
     type: ADD_RECIPE_REQUEST,
     payload: {
       newRecipe: recipe
     },
     meta: null,
     error: null
-  }
+  })
 }
 
 function deleteRecipeRequest (id) {
@@ -48,7 +49,6 @@ function deleteRecipeFailure (error) {
 
 export function deleteRecipe (dispatch) {
   return recipeId => {
-    console.log('deletion begins')
     dispatch(deleteRecipeRequest(recipeId))
 
     return fetch(`/recipes/recipe/${recipeId}`, { method: 'DELETE' })

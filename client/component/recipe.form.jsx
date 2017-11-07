@@ -1,99 +1,87 @@
 import React from 'react'
-
-import {RecipeProductListForm} from './recipeProductsListForm'
-import {RecipeStepList} from './recipeStepListForm'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { addRecipe, addProduct, changeName, changeProduct } from '../actions/recipe.action'
+import { getAllProducts } from '../actions/product.action'
 
 export class RecipeAddForm extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      data: Immutable.fromJS({
-        title: '',
-        category: '',
-        steps: [],
-        products: []
-      })
-    }
 
-    this.titleChange = this.titleChange.bind(this)
-    this.categoryChange = this.categoryChange.bind(this)
-    this.productChange = this.productChange.bind(this)
-    this.stepChange = this.stepChange.bind(this)
-    this.productChange = this.productChange.bind(this)
-    this.productAdd = this.productAdd.bind(this)
-    this.addStep = this.addStep.bind(this)
-  }
-
-  titleChange (event) {
-    this.setState({data: this.state.data.set('title', event.target.value)})
-  }
-
-  categoryChange (event) {
-    this.setState({data: this.state.data.set('category', event.target.value)})
-  }
-
-  productChange (id) {
-    return name => event => {
-      const oldProducts = this.state.data.get('products')
-      const index = oldProducts.findIndex(p => p.get('id') === id)
-      const newProducts = oldProducts.update(index, p => p.set(name, event.target.value))
-      this.setState({data: this.state.data.set('products', newProducts)})
-    }
-  }
-
-  productAdd (event) {
-    const cPs = this.state.data.products
-    const nP = {
-      id: cPs.size + 1,
-      name: '',
-      quantity: 0,
-      unit: ''
-    }
-
-    const nCPs = [...cPs, nP]
-
-    this.setState({data: Object.assign({}, this.state.data, { products: nCPs}) })
-
-    event.preventDefault()
-  }
-
-  stepChange (index) {
-    return event => {
-      // const nSteps = this.state.data.get('steps').update(index, s => event.target.value)
-      // this.setState({data: this.state.data.set('steps', nSteps)})
-    }
-  }
-
-  addStep (event) {
-    const nSteps = [...this.state.data.steps, '']
-    this.setState({ data: Object.assign({}, this.state.data, { steps: nSteps})})
+  componentDidMount () {
+    this.props.getAllProducts()
   }
 
   render () {
     return (
             <form className="pure-form pure-form-aligned">
-              <fieldset>
+              {/* <fieldset> */}
                 <div className="pure-control-group">
                 <label>title</label>
-                <input type="text" placeholder="Titre recette" onChange={this.titleChange} value={this.state.data.title}/>
+                <input type="text" placeholder="Titre recette" onChange={this.props.titleChange} value={this.props.title}/>
                 </div>
 
-                <div className="pure-control-group">
+                {/* <div className="pure-control-group">
                 <label>category</label>
                 <input type="text" placeholder="Catégorie recette" onChange={this.categoryChange} value={this.state.data.category}/>
-                </div>
+                </div> */}
 
                 <div className="pure-control-group">
-                <RecipeProductListForm change={this.productChange} products={this.state.data.products} add={this.productAdd}/>
+                  {this.props.products.map((product, index) =>
+                    <div key={product._id}>
+                      <input type="text" value={product.name} onChange={event => this.props.productChange(event.target.value, index)} />
+                    </div>
+                  )}
+                {/* <RecipeProductListForm change={this.props.productChange} products={this.state.data.products} add={this.productAdd}/> */}
                 </div>
+                <button type="reset" className="pure-button" onClick={this.props.addProduct}>Ajouter produit</button>
 
-                <div className="pure-control-group">
+                <datalist id="allCategories">
+                  {this.props.allProducts.map(product =>
+                    <option key={product._id} value={product.name}></option>
+                  )}
+                </datalist>
+
+                {/* <div className="pure-control-group">
                 <RecipeStepList steps={this.state.data.steps} onchange={this.stepChange} add={this.addStep} />
-                </div>
+                </div> */}
 
-                <button className="pure-button pure-button-primary" onClick={this.props.onAddRecipe2(() => this.state.data)}> Ajouter recette réelle</button>
-                </fieldset>
+                {<button className="pure-button pure-button-primary" onClick={this.props.addRecipe}> Ajouter recette réelle</button>}
+                {/* </fieldset> */}
             </form>
     )
   }
 }
+
+RecipeAddForm.propTypes = {
+  title: PropTypes.string,
+  products: PropTypes.array,
+  allProducts: PropTypes.array,
+  getAllProducts: PropTypes.func,
+  titleChange: PropTypes.func,
+  productChange: PropTypes.func,
+  addProduct: PropTypes.func,
+  addRecipe: PropTypes.func
+}
+
+const mapStateToProps = (state) => {
+  return {
+    products: state.recipeForm.products,
+    title: state.recipeForm.name,
+    steps: state.recipeForm.steps,
+    allProducts: state.products
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllProducts: getAllProducts(dispatch),
+    titleChange: changeName(dispatch),
+    productChange: changeProduct(dispatch),
+    addRecipe: addRecipe(dispatch),
+    addProduct: addProduct(dispatch)
+  }
+}
+
+export const ConnectedRecipeAddForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecipeAddForm)
