@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addRecipe, addProduct, changeName, changeProduct } from '../actions/recipe.action'
+import { addRecipe, addProduct, changeName, changeProduct, changeQuantity, changeUnit } from '../actions/recipe.action'
 import { getAllProducts } from '../actions/product.action'
 
 export class RecipeAddForm extends React.Component {
@@ -27,14 +27,17 @@ export class RecipeAddForm extends React.Component {
                 <div className="pure-control-group">
                   {this.props.products.map((product, index) =>
                     <div key={index}>
-                      <input type="text" value={product} onChange={event => this.props.productChange(event.target.value, index)} />
+                      <label>Produit:</label>
+                      <input list="allProducts" value={product.product.name} onChange={event => this.props.productChange(event.target.value, index)} />
+                      <label>Quantité:</label>
+                      <input type="number" value={product.quantity} onChange={event => this.props.productQuantityChange(event.target.value, index)}/>
                     </div>
                   )}
                 {/* <RecipeProductListForm change={this.props.productChange} products={this.state.data.products} add={this.productAdd}/> */}
                 </div>
                 <button type="reset" className="pure-button" onClick={this.props.addProduct}>Ajouter produit</button>
 
-                <datalist id="allCategories">
+                <datalist id="allProducts">
                   {this.props.allProducts.map(product =>
                     <option key={product._id} value={product.name}></option>
                   )}
@@ -58,6 +61,8 @@ RecipeAddForm.propTypes = {
   getAllProducts: PropTypes.func,
   titleChange: PropTypes.func,
   productChange: PropTypes.func,
+  productQuantityChange: PropTypes.func,
+  productUnitChange: PropTypes.func,
   addProduct: PropTypes.func,
   addRecipe: PropTypes.func
 }
@@ -77,7 +82,9 @@ const mapDispatchToProps = (dispatch) => {
     titleChange: changeName(dispatch),
     productChange: changeProduct(dispatch),
     addRecipe: addRecipe(dispatch),
-    addProduct: addProduct(dispatch)
+    addProduct: addProduct(dispatch),
+    productQuantityChange: changeQuantity(dispatch),
+    productUnitChange: changeUnit(dispatch)
   }
 }
 

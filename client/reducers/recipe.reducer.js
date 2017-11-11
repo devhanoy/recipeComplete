@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import { ADD_RECIPE, CHANGE_RECIPE_NAME, ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP } from '../actions/recipe.type'
+import { ADD_RECIPE, CHANGE_RECIPE_NAME, ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT, CHANGE_RECIPE_STEP } from '../actions/recipe.type'
 
 export function recipes (state = {}, action) {
   var result
@@ -30,16 +30,37 @@ function steps (state = [], { type, payload }) {
   }
 }
 
-function products (state = [''], { type, payload }) {
+const baseProduct = { name: '' }
+const baseCompleteProduct = {
+  product: baseProduct,
+  quantity: '',
+  unitId: ''
+}
+function products (state = [baseCompleteProduct], { type, payload }) {
   switch (type) {
     case ADD_RECIPE_PRODUCT:
-      return [...state, '']
+      return [...state, baseCompleteProduct]
     case CHANGE_RECIPE_PRODUCT:
-      const { index, product } = payload
-      return [...state.slice(0, index), product, ...state.slice(index + 1)]
+      const { product } = payload
+      return assignElemAt(state, { product }, payload.index)
+    case CHANGE_RECIPE_PRODUCT_QUANTITY:
+      const { quantity } = payload
+      return assignElemAt(state, { quantity }, payload.index)
+    case CHANGE_RECIPE_PRODUCT_UNIT:
+      const { unitId } = payload
+      return assignElemAt(state, { unitId }, payload.index)
     default:
       return state
   }
+}
+
+function assignElemAt (previousList, newProp, index) {
+  const newElem = Object.assign({}, previousList[index], newProp)
+  return changeElemAt(previousList, newElem, index)
+}
+
+function changeElemAt (previousList, newElem, index) {
+  return [...previousList.slice(0, index), newElem, ...previousList.slice(index + 1)]
 }
 
 function name (state = '', { type, payload }) {

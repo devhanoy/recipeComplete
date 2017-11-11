@@ -1,6 +1,6 @@
 import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS,
        DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE,
-      ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP } from './recipe.type'
+      ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT } from './recipe.type'
 import { store } from '../store-creation'
 import { jsonPost } from '../helpers/requestHelper'
 
@@ -76,13 +76,40 @@ export function addProduct (dispatch) {
 }
 
 export function changeProduct (dispatch) {
-  return (product, index) => dispatch({
-    type: CHANGE_RECIPE_PRODUCT,
-    payload: {
-      product,
-      index
-    }
-  })
+  return (productName, index) => {
+    const product = store.getState().products.find(p => p.name === productName) || { name: productName }
+    dispatch({
+      type: CHANGE_RECIPE_PRODUCT,
+      payload: {
+        product,
+        index
+      }
+    })
+  }
+}
+
+export function changeQuantity (dispatch) {
+  return (quantity, index) => {
+    dispatch({
+      type: CHANGE_RECIPE_PRODUCT_QUANTITY,
+      payload: {
+        quantity,
+        index
+      }
+    })
+  }
+}
+
+export function changeUnit (dispatch) {
+  return (unitId, index) => {
+    dispatch({
+      type: CHANGE_RECIPE_PRODUCT_UNIT,
+      payload: {
+        unitId,
+        index
+      }
+    })
+  }
 }
 
 export function changeStep (dispatch) {
