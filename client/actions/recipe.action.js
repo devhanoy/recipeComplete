@@ -5,9 +5,9 @@ import { store } from '../store-creation'
 import { jsonPost } from '../helpers/requestHelper'
 
 export function addRecipe (dispatch) {
-  const recipe = store.getState().recipeForm
   return () => {
-    jsonPost('/recipes/categoryProduct/add', { recipe })
+    const recipe = store.getState().recipeForm
+    jsonPost('/recipes/recipe/add', recipe)
     dispatch({
       type: ADD_RECIPE_REQUEST,
       payload: {

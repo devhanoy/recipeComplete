@@ -47,7 +47,7 @@ export class RecipeAddForm extends React.Component {
                 <RecipeStepList steps={this.state.data.steps} onchange={this.stepChange} add={this.addStep} />
                 </div> */}
 
-                {<button className="pure-button pure-button-primary" onClick={this.props.addRecipe}> Ajouter recette réelle</button>}
+                {<button type="reset" className="pure-button pure-button-primary" onClick={this.props.addRecipe}> Ajouter recette réelle</button>}
                 {/* </fieldset> */}
             </form>
     )
