@@ -18,7 +18,6 @@ export function addProduct (dispatch) {
     dispatch(addProductRequest(newProduct))
 
     return jsonPost(`/recipes/product/`, newProduct)
-                .then(response => response.json())
                 .then(product => dispatch(addProductSuccess(product)))
                 .catch(err => dispatch(addProductFailure(err)))
   }

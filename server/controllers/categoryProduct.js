@@ -19,9 +19,9 @@ async function delById (ctx, next) {
 }
 
 async function add (ctx, next) {
-  const body = parser.form(ctx.request)
+  const body = parser.json(ctx.request)
   const categoryproduct = body.categoryproduct
-  let newCategory = new Model({name: categoryproduct})
+  const newCategory = new Model({name: categoryproduct})
   await newCategory.save()
   ctx.body = newCategory
 }

@@ -11,7 +11,6 @@ export function addCategoryProduct (dispatch) {
     dispatch(addCategoryProductRequest(categoryproduct))
 
     return jsonPost(`/recipes/categoryProduct/add`, {categoryproduct})
-                .then(response => response.json())
                 .then(categoryproduct => dispatch(addCategoryProductSuccess(categoryproduct)))
                 .catch(err => addCategoryProductFailure(err))
   }

@@ -3,17 +3,13 @@ export function jsonPost (url, data) {
   const options = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: serialize(data)
+    body: JSON.stringify(data)
   }
   const request = new Request(url, options)
 
   return fetch(request)
+        .then(res => res.json())
 }
-
-function serialize (data) {
-  return Object.keys(data).map(function (keyName) {
-    return `${encodeURIComponent(keyName)}=${encodeURIComponent(data[keyName])}`
-  }).join('&')
-};
