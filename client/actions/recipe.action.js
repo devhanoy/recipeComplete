@@ -7,6 +7,7 @@ import { jsonPost } from '../helpers/requestHelper'
 export function addRecipe (dispatch) {
   return () => {
     const recipe = store.getState().recipeForm
+    recipe.products = recipe.products.map(p => ({ productId: p._id, quantity: p.quantity, unitId: p.unitId }))
     jsonPost('/recipes/recipe/add', recipe)
     dispatch({
       type: ADD_RECIPE_REQUEST,

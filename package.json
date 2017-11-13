@@ -9,7 +9,7 @@
     "test": "./node_modules/.bin/mocha --reporter spec",
     "debug": "nodemon --inspect app.js",
     "lint": "./node_modules/.bin/eslint --output-file ./lintResult.html --format html --fix **/*",
-    "webpack": "./node_modules/.bin/webpack"
+    "webpack": "webpack"
   },
   "dependencies": {
     "chai-http": "^3.0.0",

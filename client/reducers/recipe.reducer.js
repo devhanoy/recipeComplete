@@ -63,7 +63,7 @@ function changeElemAt (previousList, newElem, index) {
   return [...previousList.slice(0, index), newElem, ...previousList.slice(index + 1)]
 }
 
-function name (state = '', { type, payload }) {
+function title (state = '', { type, payload }) {
   switch (type) {
     case CHANGE_RECIPE_NAME:
       return payload
@@ -73,7 +73,7 @@ function name (state = '', { type, payload }) {
 }
 
 export const recipeForm = combineReducers({
-  name,
+  title,
   steps,
   products
 })

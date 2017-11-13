@@ -70,7 +70,7 @@ RecipeAddForm.propTypes = {
 const mapStateToProps = (state) => {
   return {
     products: state.recipeForm.products,
-    title: state.recipeForm.name,
+    title: state.recipeForm.title,
     steps: state.recipeForm.steps,
     allProducts: state.products
   }

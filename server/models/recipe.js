@@ -16,7 +16,7 @@ const productSchema = new Schema({
 
 const recipeSchema = new Schema({
   title: String,
-  products: [{name: String, quantity: Number, unit: String}],
+  products: [{ productId: ObjectId, quantity: Number, unitId: ObjectId }],
   steps: [String],
   category: String
 })
