@@ -14,11 +14,11 @@ module.exports = {
         // filename: "bundle.js"
   },
   module: {
-	 loaders: [
+	 rules: [
 		 {
 			 test: /\.jsx?$/,
 			 exclude: /node_modules/,
-			 babelrc: false,
+			//  babelrc: false,
 			 loader: 'babel-loader',
 			  query: {
 			  'presets': ['es2015', 'react']
@@ -28,34 +28,9 @@ module.exports = {
 	   ]
   },
   watch: true,
-    // plugins: [
-        // new CommonsChunkPlugin({
-		  // name: "commons",
-		  // // (the commons chunk name)
-
-		  // //filename: "commons.js",
-		  // // (the filename of the commons chunk)
-
-		   // minChunks: 2,
-		  // // (Modules must be shared between 3 entries)
-
-		  // // chunks: ["pageA", "pageB"],
-		  // // (Only use these entries)
-		// })
-    // ],
-
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   devtool: '#cheap-eval-source-map',
-  debug: true
+  // debug: true
 }
- // entry: {
-        // a: "./a",
-        // b: "./b",
-        // c: ["./c", "./d"]
-    // },
-    // output: {
-        // path: path.join(__dirname, "dist"),
-        // filename: "[name].js"
-    // }
