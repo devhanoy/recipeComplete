@@ -4,25 +4,25 @@ const Model = require('../models/product').Product
 const Router = require('koa-router')
 const parser = require('co-body')
 
-function *getAll () {
-  this.body = yield Model.find({})
+async function getAll (ctx, next) {
+  ctx.body = await Model.find({})
 }
 
-function *getById () {
-  const productId = this.params.id
-  this.body = yield Model.findById(productId)
+async function getById (ctx, next) {
+  const productId = ctx.query.id
+  ctx.body = await Model.findById(productId)
 }
 
-function *delById () {
-  const productId = this.params.id
-  this.body = yield Model.findByIdAndRemove(productId)
+async function delById (ctx, next) {
+  const productId = ctx.query.id
+  ctx.body = await Model.findByIdAndRemove(productId)
 }
 
-function *add () {
-  const body = yield parser.form(this.request)
+async function add (ctx, next) {
+  const body = parser.form(ctx.request)
   let newProduct = new Model(body)
-  yield newProduct.save()
-  this.body = newProduct
+  await newProduct.save()
+  ctx.body = newProduct
 }
 
 const router = new Router()

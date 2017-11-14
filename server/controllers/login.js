@@ -5,34 +5,34 @@ const Router = require('koa-router')
 const logger = require('../helpers/logger').logger
 const parser = require('co-body')
 
-function* getLogin () {
-  yield this.render('login', { title: 'Login' })
+async function getLogin (ctx, next) {
+  await this.render('login', { title: 'Login' })
 }
 
-function* postLogin () {
-  let body = yield parser.form(this.request)
+async function postLogin (ctx, next) {
+  let body = parser.form(ctx.request)
 
-  let success = yield dao.checkUser(body.login, body.password)
+  let success = await dao.checkUser(body.login, body.password)
 
   const verb = success ? 'successed' : 'failed'
   logger.log('info', `User ${body.login} ${verb} to log in`)
 
-  yield this.render('login', { title: 'Login' })
+  await this.render('login', { title: 'Login' })
 }
 
-function* getSignin () {
-  yield this.render('signin', { title: 'Inscription' })
+async function getSignin (ctx, next) {
+  await this.render('signin', { title: 'Inscription' })
 }
 
-function* postSignin () {
-  let body = yield parser.form(this.request)
+async function postSignin (ctx, next) {
+  let body = parser.form(ctx.request)
 
-  let success = yield dao.insert(body.login, body.password)
+  let success = await dao.insert(body.login, body.password)
   if (success) {
     logger.log('info', `User ${body.login} has subscribed`)
   }
 
-  yield this.render('signin', { title: 'Inscription' })
+  await this.render('signin', { title: 'Inscription' })
 }
 
 const router = new Router()

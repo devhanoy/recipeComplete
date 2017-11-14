@@ -3,22 +3,24 @@
 const model = require('../models/recipe')
 const Router = require('koa-router')
 
-function *getAll () {
-  this.body = yield model.find({})
+async function getAll (ctx, next) {
+  ctx.body = await model.find({})
 }
 
-function *home (next) {
-  yield this.render('index2', { title: 'Recettes' })
-};
-
-function *getById () {
-  const recipeId = this.params.id
-  this.body = yield model.findById(recipeId)
+async function home (ctx, next) {
+  console.log('in home')
+  console.log(ctx.render)
+  // await ctx.render('index2', { title: 'Recettes' })
 }
 
-function *delById () {
-  const recipeId = this.params.id
-  this.body = yield model.findByIdAndRemove(recipeId)
+async function getById (ctx, next) {
+  const recipeId = ctx.query.id
+  ctx.body = await model.findById(recipeId)
+}
+
+async function delById (ctx, next) {
+  const recipeId = ctx.query.id
+  ctx.body = await model.findByIdAndRemove(recipeId)
 }
 
 const router = new Router()

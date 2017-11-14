@@ -4,27 +4,26 @@ const Model = require('../models/product').CategoryProduct
 const Router = require('koa-router')
 const parser = require('co-body')
 
-function *getAll () {
-  this.body = yield Model.find({})
+async function getAll (ctx, next) {
+  ctx.body = await Model.find({})
 }
 
-function *getById () {
-  const categoryProductId = this.params.id
-  this.body = yield Model.findById(categoryProductId)
+async function getById (ctx, next) {
+  const categoryProductId = this.query.id
+  ctx.body = await Model.findById(categoryProductId)
 }
 
-function *delById () {
-  const categoryProductId = this.params.id
-  this.body = yield Model.findByIdAndRemove(categoryProductId)
-  console.log(this.body)
+async function delById (ctx, next) {
+  const categoryProductId = this.query.id
+  ctx.body = await Model.findByIdAndRemove(categoryProductId)
 }
 
-function *add () {
-  const body = yield parser.form(this.request)
+async function add (ctx, next) {
+  const body = parser.form(ctx.request)
   const categoryproduct = body.categoryproduct
   let newCategory = new Model({name: categoryproduct})
-  yield newCategory.save()
-  this.body = newCategory
+  await newCategory.save()
+  ctx.body = newCategory
 }
 
 const router = new Router()
