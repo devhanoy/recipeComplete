@@ -30,11 +30,25 @@ async function add (ctx, next) {
   this.body = newRecipe
 }
 
+async function homeSpecific (ctx, next) {
+  const action = ctx.query.action
+  console.log(ctx.query);
+  console.log(action);
+  if (mainRoutes.some(ac => ac === action)) {
+    await home(ctx, next)
+  } else {
+    await next()
+  }
+}
+
+const mainRoutes = ['categories', 'addProduct', 'products', 'addRecipe']
+
 const router = new Router()
 router.get('/', home)
 router.get('/all', getAll)
 router.del('/recipe/:id', delById)
 router.get('/recipe/:id', getById)
 router.post('/recipe/add', add)
+router.get('/:action', homeSpecific)
 
 module.exports.router = router
