@@ -7,8 +7,6 @@ const router = require('./helpers/routes').router
 const Koa = require('koa')
 const helmet = require('koa-helmet')
 const session = require('koa-session')
-const hbs = require('koa-hbs')
-const handlebars = require('koa-handlebars')
 const config = require('config')
 const myLogger = require('./helpers/logger').logger
 const mongoConn = require('./helpers/mongoConnection')
@@ -31,14 +29,6 @@ app.use(logger())
 // Security
 app.use(helmet())
 
-// koa-hbs is middleware. `use` it before you want to render a view
-app.use(handlebars({
-  viewPath: path.join(__dirname, 'views'),
-  partialsPath: path.join(__dirname, 'views', 'partials'),
-  defaultLayout: 'default',
-  layoutsPath: path.join(__dirname, 'views', 'layouts')
-}))
-
 app.use(router.routes())
     .use(router.allowedMethods())
 
@@ -48,23 +38,6 @@ app.use(serve(path.join(__dirname, '..', 'public')))
 // Compress
 
 app.use(compress())
-
-app.use(async function () {
-  console.log('in second use')
-  await this.render('index2', { title: 'Recettes' })
-})
-
-// async function home (ctx, next) {
-//   console.log('in home')
-//   console.log(ctx.render)
-//   await ctx.render('index2', { title: 'Recettes' })
-// };
-
-// process.on('beforeExit', (code) => {
-//   console.log('bye!')
-//   console.log(`Process exits with status ${code}`)
-//   connection.disconnect();
-// })
 
 if (!module.parent) {
   app.listen(3000)

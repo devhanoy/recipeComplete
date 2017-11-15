@@ -2,15 +2,15 @@
 
 const model = require('../models/recipe')
 const Router = require('koa-router')
+const send = require('koa-send')
+const path = require('path')
 
 async function getAll (ctx, next) {
   ctx.body = await model.find({})
 }
 
 async function home (ctx, next) {
-  console.log('in home')
-  console.log(ctx.render)
-  // await ctx.render('index2', { title: 'Recettes' })
+  await send(ctx, path.join( 'views','pages', 'index.html' ), { root: path.join(__dirname, '..')  })
 }
 
 async function getById (ctx, next) {
