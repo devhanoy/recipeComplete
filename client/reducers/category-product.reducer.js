@@ -23,4 +23,3 @@ export function categoryProductFormName (state = '', action) {
       return state
   }
 }
-

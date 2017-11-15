@@ -1,14 +1,15 @@
 import { ADD_RECIPE_REQUEST, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS,
-       DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE,
-      ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT } from './recipe.type'
+  DELETE_RECIPE_FAILURE, GET_RECIPE_REQUEST, GET_RECIPE_SUCCESS, GET_RECIPE_FAILURE,
+  ADD_RECIPE_PRODUCT, ADD_RECIPE_STEP, CHANGE_RECIPE_NAME, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_STEP, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT } from './recipe.type'
 import { store } from '../store-creation'
 import { jsonPost } from '../helpers/requestHelper'
 
 export function addRecipe (dispatch) {
   return () => {
     const recipe = store.getState().recipeForm
-    recipe.products = recipe.products.map(p => ({ productId: p._id, quantity: p.quantity, unitId: p.unitId }))
-    jsonPost('/recipes/recipe/add', recipe)
+    const products = recipe.products.map(p => ({ productId: p.product._id, quantity: p.quantity, unitId: p.unitId || null }))
+    const nRecipes = Object.assign({}, recipe, {products})
+    jsonPost('/recipes/recipe/add', nRecipes)
     dispatch({
       type: ADD_RECIPE_REQUEST,
       payload: {
@@ -58,9 +59,9 @@ export function deleteRecipe (dispatch) {
     dispatch(deleteRecipeRequest(recipeId))
 
     return fetch(`/recipes/recipe/${recipeId}`, { method: 'DELETE' })
-            .then(response => response.json())
-            .then(recipe => dispatch(deleteRecipeSuccess(recipeId)))
-            .catch(err => deleteRecipeFailure(err))
+      .then(response => response.json())
+      .then(recipe => dispatch(deleteRecipeSuccess(recipeId)))
+      .catch(err => deleteRecipeFailure(err))
   }
 }
 

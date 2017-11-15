@@ -27,4 +27,3 @@ export function productFormChange (state = productFormInitialState, action) {
       return state
   }
 }
-

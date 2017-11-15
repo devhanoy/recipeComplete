@@ -48,19 +48,19 @@ const checkUser = function (username, password) {
 const insert = function (username, password) {
   let salt
   return crypto.randomBytes(bytesSize)
-      .then(bytes => {
-        salt = bytes.toString('hex')
-        const p = hashWithSalt(password, salt)
-        const nUser = new User({
-          username: username,
-          password: p,
-          salt: salt
-        })
-        return nUser.save()
+    .then(bytes => {
+      salt = bytes.toString('hex')
+      const p = hashWithSalt(password, salt)
+      const nUser = new User({
+        username: username,
+        password: p,
+        salt: salt
       })
-      .catch(err => {
-        logger.log('error', 'fail to insert new user', err)
-      })
+      return nUser.save()
+    })
+    .catch(err => {
+      logger.log('error', 'fail to insert new user', err)
+    })
 }
 
 module.exports.checkUser = checkUser

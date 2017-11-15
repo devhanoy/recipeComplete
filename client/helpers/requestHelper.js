@@ -11,5 +11,5 @@ export function jsonPost (url, data) {
   const request = new Request(url, options)
 
   return fetch(request)
-        .then(res => res.json())
+    .then(res => res.json())
 }

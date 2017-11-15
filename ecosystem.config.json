@@ -3,6 +3,7 @@
       "name"        : "app",
       "script"      : "./server/app.js",
       "watch"       : ["server", "config"],
-      "ignore_watch": ["**/*.log"]
+      "ignore_watch": ["**/*.log"],
+      "interpreter_args": "--inspect"
     }]
   }

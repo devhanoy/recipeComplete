@@ -12,4 +12,3 @@ export const mainReducer = combineReducers({
   categoryProduct,
   categoryProductFormName
 })
-

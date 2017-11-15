@@ -11,5 +11,4 @@ router.use('/recipes', recipes.router.routes())
 router.use('/recipes', product.router.routes())
 router.use('/recipes', categoryProduct.router.routes())
 
-
 module.exports.router = router

@@ -1,6 +1,6 @@
 import { ADD_CATEGORY_PRODUCT_SUCCESS, DELETE_CATEGORY_PRODUCT_SUCCESS, ADD_CATEGORY_PRODUCT_FAILURE,
-       ADD_CATEGORY_PRODUCT_REQUEST, DELETE_CATEGORY_PRODUCT_FAILURE, DELETE_CATEGORY_PRODUCT_REQUEST,
-        CHANGE_NAME_FORM_CATEGORY, GET_ALL_CATEGORY_PRODUCT } from './category-product.type'
+  ADD_CATEGORY_PRODUCT_REQUEST, DELETE_CATEGORY_PRODUCT_FAILURE, DELETE_CATEGORY_PRODUCT_REQUEST,
+  CHANGE_NAME_FORM_CATEGORY, GET_ALL_CATEGORY_PRODUCT } from './category-product.type'
 import {jsonPost} from '../helpers/requestHelper'
 
 import { store } from '../store-creation'
@@ -11,8 +11,8 @@ export function addCategoryProduct (dispatch) {
     dispatch(addCategoryProductRequest(categoryproduct))
 
     return jsonPost(`/recipes/categoryProduct/add`, {categoryproduct})
-                .then(categoryproduct => dispatch(addCategoryProductSuccess(categoryproduct)))
-                .catch(err => addCategoryProductFailure(err))
+      .then(categoryproduct => dispatch(addCategoryProductSuccess(categoryproduct)))
+      .catch(err => addCategoryProductFailure(err))
   }
 }
 
@@ -54,9 +54,9 @@ export function deleteCategoryProduct (dispatch) {
     dispatch(deleteCategoryProductRequest(categoryproduct))
 
     return fetch(`/recipes/categoryProduct/${categoryproduct._id}`, { method: 'DELETE' })
-                .then(response => response.json())
-                .then(categoryproduct => dispatch(deleteCategoryProductSuccess(categoryproduct)))
-                .catch(err => deleteCategoryProductFailure(err))
+      .then(response => response.json())
+      .then(categoryproduct => dispatch(deleteCategoryProductSuccess(categoryproduct)))
+      .catch(err => deleteCategoryProductFailure(err))
   }
 }
 
@@ -109,14 +109,13 @@ export function getAllCategories (dispatch) {
     const categoryProductList = store.getState().categoryProduct
     if (!categoryProductList.length) {
       fetch('/recipes/categoryProduct/all', {method: 'GET'})
-                .then(response => response.json())
-                .then(categories => dispatch({
-                  type: GET_ALL_CATEGORY_PRODUCT,
-                  payload: categories,
-                  meta: null,
-                  error: null
-                }))
+        .then(response => response.json())
+        .then(categories => dispatch({
+          type: GET_ALL_CATEGORY_PRODUCT,
+          payload: categories,
+          meta: null,
+          error: null
+        }))
     }
   }
 }
-

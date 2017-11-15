@@ -5,18 +5,17 @@ import PropTypes from 'prop-types'
 import { getAllProducts } from '../actions/product.action'
 
 export class ProductsList extends React.Component {
-
   componentDidMount () {
     this.props.getAllProducts()
   }
 
   render (props) {
     return (
-        <div>
-            {this.props.products.map(product =>
-                <div key={product._id} >{ product.name }</div>
-            )}
-        </div>
+      <div>
+        {this.props.products.map(product =>
+          <div key={product._id} >{ product.name }</div>
+        )}
+      </div>
     )
   }
 }
@@ -41,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 export const ConnectedProductsList = connect(
   mapStateToProps,
   mapDispatchToProps
-  )(ProductsList)
+)(ProductsList)

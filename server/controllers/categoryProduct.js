@@ -9,12 +9,12 @@ async function getAll (ctx, next) {
 }
 
 async function getById (ctx, next) {
-  const categoryProductId = this.query.id
+  const categoryProductId = ctx.query.id
   ctx.body = await Model.findById(categoryProductId)
 }
 
 async function delById (ctx, next) {
-  const categoryProductId = this.query.id
+  const categoryProductId = ctx.query.id
   ctx.body = await Model.findByIdAndRemove(categoryProductId)
 }
 

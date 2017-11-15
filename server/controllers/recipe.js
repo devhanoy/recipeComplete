@@ -2,38 +2,38 @@
 
 const Model = require('../models/recipe')
 const Router = require('koa-router')
+const parser = require('co-body')
 const send = require('koa-send')
 const path = require('path')
 
 async function getAll (ctx, next) {
-  ctx.body = await model.find({})
+  ctx.body = await Model.find({})
 }
 
 async function home (ctx, next) {
-  await send(ctx, path.join( 'views','pages', 'index.html' ), { root: path.join(__dirname, '..')  })
+  await send(ctx, path.join('views', 'pages', 'index.html'), { root: path.join(__dirname, '..') })
 }
 
 async function getById (ctx, next) {
   const recipeId = ctx.query.id
-  ctx.body = await model.findById(recipeId)
+  ctx.body = await Model.findById(recipeId)
 }
 
 async function delById (ctx, next) {
   const recipeId = ctx.query.id
-  ctx.body = await model.findByIdAndRemove(recipeId)
+  ctx.body = await Model.findByIdAndRemove(recipeId)
 }
 
 async function add (ctx, next) {
-  const body = await parser.json(ctx.req)
+  const body = parser.json(ctx.req)
   const newRecipe = new Model(body)
   await newRecipe.save()
-  this.body = newRecipe
+  ctx.body = newRecipe
 }
 
+const mainRoutes = ['categories', 'addProduct', 'products', 'addRecipe']
 async function homeSpecific (ctx, next) {
-  const action = ctx.query.action
-  console.log(ctx.query);
-  console.log(action);
+  const action = ctx.params.action
   if (mainRoutes.some(ac => ac === action)) {
     await home(ctx, next)
   } else {
@@ -41,14 +41,12 @@ async function homeSpecific (ctx, next) {
   }
 }
 
-const mainRoutes = ['categories', 'addProduct', 'products', 'addRecipe']
-
 const router = new Router()
-router.get('/', home)
 router.get('/all', getAll)
 router.del('/recipe/:id', delById)
 router.get('/recipe/:id', getById)
 router.post('/recipe/add', add)
+router.get('/', home)
 router.get('/:action', homeSpecific)
 
 module.exports.router = router

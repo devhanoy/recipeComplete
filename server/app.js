@@ -30,7 +30,7 @@ app.use(logger())
 app.use(helmet())
 
 app.use(router.routes())
-    .use(router.allowedMethods())
+  .use(router.allowedMethods())
 
 // Serve static files
 app.use(serve(path.join(__dirname, '..', 'public')))

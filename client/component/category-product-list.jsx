@@ -5,18 +5,17 @@ import PropTypes from 'prop-types'
 import { getAllCategories } from '../actions/category-product.action'
 
 export class RecipeCategoryProductListForm extends React.Component {
-
   componentDidMount () {
     this.props.getAllCategories()
   }
 
   render (props) {
     return (
-        <div>
-            {this.props.categories.map(category =>
-                <div key={category._id} >{ category.name }</div>
-            )}
-        </div>
+      <div>
+        {this.props.categories.map(category =>
+          <div key={category._id} >{ category.name }</div>
+        )}
+      </div>
     )
   }
 }
@@ -41,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 export const ConnectedRecipeCategoryProductListForm = connect(
   mapStateToProps,
   mapDispatchToProps
-  )(RecipeCategoryProductListForm)
+)(RecipeCategoryProductListForm)

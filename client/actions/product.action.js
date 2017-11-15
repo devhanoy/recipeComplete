@@ -1,7 +1,7 @@
 import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS,
-         DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS,
-         GET_ALL_PRODUCTS,
-        CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './product.type'
+  DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS,
+  GET_ALL_PRODUCTS,
+  CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './product.type'
 import {jsonPost} from '../helpers/requestHelper'
 
 import { store } from '../store-creation'
@@ -18,8 +18,8 @@ export function addProduct (dispatch) {
     dispatch(addProductRequest(newProduct))
 
     return jsonPost(`/recipes/product/`, newProduct)
-                .then(product => dispatch(addProductSuccess(product)))
-                .catch(err => dispatch(addProductFailure(err)))
+      .then(product => dispatch(addProductSuccess(product)))
+      .catch(err => dispatch(addProductFailure(err)))
   }
 }
 
@@ -61,9 +61,9 @@ export function deleteProduct (dispatch) {
     dispatch(deleteProductRequest(product))
 
     return fetch(`/recipes/product/${product._id}`, { method: 'DELETE' })
-                .then(response => response.json())
-                .then(product => dispatch(deleteProductRequest(product)))
-                .catch(err => deleteProductFailure(err))
+      .then(response => response.json())
+      .then(product => dispatch(deleteProductRequest(product)))
+      .catch(err => deleteProductFailure(err))
   }
 }
 
@@ -105,13 +105,13 @@ export function getAllProducts (dispatch) {
     const productsList = store.getState().products
     if (!productsList.length) {
       fetch('/recipes/product/all', {method: 'GET'})
-                .then(response => response.json())
-                .then(products => dispatch({
-                  type: GET_ALL_PRODUCTS,
-                  payload: products,
-                  meta: null,
-                  error: null
-                }))
+        .then(response => response.json())
+        .then(products => dispatch({
+          type: GET_ALL_PRODUCTS,
+          payload: products,
+          meta: null,
+          error: null
+        }))
     }
   }
 }
