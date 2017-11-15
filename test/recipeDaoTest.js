@@ -1,8 +1,8 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const expect = chai.expect
-const Model = require('../models/recipe')
-const app = require('../app')
+const Model = require('../server/models/recipe')
+const app = require('../server/app')
 
 chai.use(chaiHttp)
 
