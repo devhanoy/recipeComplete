@@ -2,7 +2,6 @@
 
 const Model = require('../models/recipe')
 const Router = require('koa-router')
-const parser = require('co-body')
 const send = require('koa-send')
 const path = require('path')
 
@@ -25,7 +24,7 @@ async function delById (ctx, next) {
 }
 
 async function add (ctx, next) {
-  const body = parser.json(ctx.req)
+  const body = ctx.request.body
   const newRecipe = new Model(body)
   await newRecipe.save()
   ctx.body = newRecipe

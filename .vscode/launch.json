@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug nodejs",
             "protocol": "inspector",
-            "program": "${workspaceFolder}/app.js"
+            "program": "${workspaceFolder}/server/app.js"
         },
         {
             "type": "node",

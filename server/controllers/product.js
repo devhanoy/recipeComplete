@@ -2,7 +2,6 @@
 
 const Model = require('../models/product').Product
 const Router = require('koa-router')
-const parser = require('co-body')
 
 async function getAll (ctx, next) {
   ctx.body = await Model.find({})
@@ -19,7 +18,7 @@ async function delById (ctx, next) {
 }
 
 async function add (ctx, next) {
-  const body = parser.json(ctx.request)
+  const body = ctx.request.body
   const newProduct = new Model(body)
   await newProduct.save()
   ctx.body = newProduct

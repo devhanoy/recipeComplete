@@ -5,6 +5,7 @@ const logger = require('koa-logger')
 const serve = require('koa-static')
 const router = require('./helpers/routes').router
 const Koa = require('koa')
+const koaBody = require('koa-body')
 const helmet = require('koa-helmet')
 const session = require('koa-session')
 const config = require('config')
@@ -28,6 +29,14 @@ app.use(logger())
 
 // Security
 app.use(helmet())
+
+app.use(koaBody({
+  multipart: false,
+  urlencoded: false,
+  text: false,
+  json: true,
+  formidable: false
+}))
 
 app.use(router.routes())
   .use(router.allowedMethods())
