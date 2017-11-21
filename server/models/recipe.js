@@ -10,15 +10,16 @@ const productSchema = new Schema({
   unitId: ObjectId,
   quantity: Number
 },
-  {
-    _id: false
-  })
+{
+  _id: false
+})
 
 const recipeSchema = new Schema({
   title: String,
   products: [{ productId: ObjectId, quantity: Number, unitId: ObjectId }],
   steps: [String],
-  category: String
+  category: String,
+  test: Boolean
 })
 
 const Recipe = mongoose.model('Recipe', recipeSchema)

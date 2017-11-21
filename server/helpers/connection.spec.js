@@ -1,6 +1,6 @@
 const chai = require('chai')
 const expect = chai.expect
-const connection = require('../server/helpers/mongoConnection')
+const connection = require('./mongoConnection')
 
 describe('connection test', function () {
   it('mongoose', function () {

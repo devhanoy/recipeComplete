@@ -1,19 +1,23 @@
+/* eslint-disable no-unused-expressions */
+
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const expect = chai.expect
-const Model = require('../server/models/recipe')
-const app = require('../server/app')
+const Model = require('./recipe')
+require('../app')
+
+const mongoose = require('mongoose')
 
 chai.use(chaiHttp)
 
-const fakeRecipe = {
+const fakeRecipe =
+{
   title: 'Recette de test',
-  products: [{ name: 'Filets de poulet', quantity: 2, unit: 'unité' },
-    { name: 'Crème fraîche', quantity: 50, unit: 'g' }],
+  products: [{ productId: mongoose.Types.ObjectId(), quantity: 56, unitId: mongoose.Types.ObjectId() }],
   steps: ['Faire dorer les filets de poulets à la poêle',
     "Ajouter la crème à la fin de la cuisson afin qu'elle devienne liquide",
     'Servir accompagnée de pâtes ou de pommes de terre'],
-  category: 'Plat principal',
+  category: 'test category',
   test: true
 }
 
@@ -27,6 +31,11 @@ describe('recipe CRUD', () => {
         recipeOfWork = r
         return true
       })
+  })
+
+  after((done) => {
+    Model.remove({ test: true })
+      .then(done)
   })
 
   it('create', () => {
@@ -70,13 +79,20 @@ describe('recipe CRUD', () => {
 describe('recipe base REST API', () => {
   let recipeOfWork
 
-  before(() => {
+  before((done) => {
     const recipe = new Model(fakeRecipe)
     return recipe.save()
       .then(r => {
         recipeOfWork = r
         return true
       })
+      .catch()
+      .then(done)
+  })
+
+  after((done) => {
+    Model.remove({ test: true })
+      .then(done)
   })
 
   it('recipe/all', () => {
@@ -93,7 +109,7 @@ describe('recipe base REST API', () => {
 
   it('recipe/get/id', () => {
     return chai.request('http://localhost:3000')
-      .get(`/recipes/get/${recipeOfWork._id}`)
+      .get(`/recipes/recipe/${recipeOfWork._id}`)
       .then(res => {
         return expect(res).to.have.status(200)
       })
