@@ -13,7 +13,7 @@ const myLogger = require('./helpers/logger').logger
 const mongoConn = require('./helpers/mongoConnection')
 
 const path = require('path')
-const app = module.exports = new Koa()
+const app = new Koa()
 
 mongoConn.connect()
 
@@ -48,7 +48,5 @@ app.use(serve(path.join(__dirname, '..', 'public')))
 
 app.use(compress())
 
-if (!module.parent) {
-  app.listen(3000)
-  myLogger.log('info', 'listening on port 3000')
-}
+module.exports = app.listen(3000)
+myLogger.log('info', 'listening on port 3000')

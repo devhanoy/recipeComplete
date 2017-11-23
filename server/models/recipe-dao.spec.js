@@ -4,7 +4,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const expect = chai.expect
 const Model = require('./recipe')
-require('../app')
+const app = require('../app')
 
 const mongoose = require('mongoose')
 
@@ -35,7 +35,7 @@ describe('recipe CRUD', () => {
 
   after((done) => {
     Model.remove({ test: true })
-      .then(done)
+      .then(() => done())
   })
 
   it('create', () => {
@@ -87,16 +87,16 @@ describe('recipe base REST API', () => {
         return true
       })
       .catch()
-      .then(done)
+      .then(() => done())
   })
 
   after((done) => {
-    Model.remove({ test: true })
-      .then(done)
+    return Model.remove({ test: true })
+      .then(() => done())
   })
 
   it('recipe/all', () => {
-    return chai.request('http://localhost:3000')
+    return chai.request(app)
       .get('/recipes/all')
       .then(res => {
         expect(res).to.be.json
@@ -108,7 +108,7 @@ describe('recipe base REST API', () => {
   })
 
   it('recipe/get/id', () => {
-    return chai.request('http://localhost:3000')
+    return chai.request(app)
       .get(`/recipes/recipe/${recipeOfWork._id}`)
       .then(res => {
         return expect(res).to.have.status(200)
