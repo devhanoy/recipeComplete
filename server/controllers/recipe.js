@@ -14,12 +14,12 @@ async function home (ctx, next) {
 }
 
 async function getById (ctx, next) {
-  const recipeId = ctx.query.id
+  const recipeId = ctx.params.id
   ctx.body = await Model.findById(recipeId)
 }
 
 async function delById (ctx, next) {
-  const recipeId = ctx.query.id
+  const recipeId = ctx.params.id
   ctx.body = await Model.findByIdAndRemove(recipeId)
 }
 
