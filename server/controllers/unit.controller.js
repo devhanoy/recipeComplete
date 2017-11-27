@@ -8,6 +8,6 @@ async function getAll (ctx, next) {
 }
 
 const router = new Router()
-router.get('/all', getAll)
+router.get('/units/all', getAll)
 
 module.exports.router = router

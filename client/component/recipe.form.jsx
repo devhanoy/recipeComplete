@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { addRecipe, addProduct, changeName, changeProduct, changeQuantity, changeUnit } from '../actions/recipe.action'
+import { getAllUnits } from '../actions/unit.action'
 import { getAllProducts } from '../actions/product.action'
 
 export class RecipeAddForm extends React.Component {
   componentDidMount () {
     this.props.getAllProducts()
+    this.props.getAllUnits()
   }
 
   render () {
@@ -30,6 +32,15 @@ export class RecipeAddForm extends React.Component {
               <input list="allProducts" value={product.product.name} onChange={event => this.props.productChange(event.target.value, index)} />
               <label>Quantité:</label>
               <input type="number" value={product.quantity} onChange={event => this.props.productQuantityChange(event.target.value, index)}/>
+              <label>Unite:</label>
+              <select>
+                {this.props.allUnits.map(unit =>
+                  <option key={unit._id}>{unit.name}</option>
+                )
+
+                }
+
+              </select>
             </div>
           )}
           {/* <RecipeProductListForm change={this.props.productChange} products={this.state.data.products} add={this.productAdd}/> */}
@@ -58,6 +69,8 @@ RecipeAddForm.propTypes = {
   products: PropTypes.array,
   allProducts: PropTypes.array,
   getAllProducts: PropTypes.func,
+  allUnits: PropTypes.array,
+  getAllUnits: PropTypes.func,
   titleChange: PropTypes.func,
   productChange: PropTypes.func,
   productQuantityChange: PropTypes.func,
@@ -71,7 +84,8 @@ const mapStateToProps = (state) => {
     products: state.recipeForm.products,
     title: state.recipeForm.title,
     steps: state.recipeForm.steps,
-    allProducts: state.products
+    allProducts: state.products,
+    allUnits: state.units
   }
 }
 
@@ -83,7 +97,8 @@ const mapDispatchToProps = (dispatch) => {
     addRecipe: addRecipe(dispatch),
     addProduct: addProduct(dispatch),
     productQuantityChange: changeQuantity(dispatch),
-    productUnitChange: changeUnit(dispatch)
+    productUnitChange: changeUnit(dispatch),
+    getAllUnits: getAllUnits(dispatch)
   }
 }
 
