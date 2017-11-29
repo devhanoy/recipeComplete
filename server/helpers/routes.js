@@ -11,6 +11,6 @@ router.use(login.router.routes())
 router.use('/recipes', recipes.router.routes())
 router.use('/recipes', product.router.routes())
 router.use('/recipes', categoryProduct.router.routes())
-router.use('/recipes', unit.router().routes())
+router.use('/recipes', unit.router.routes())
 
 module.exports.router = router
