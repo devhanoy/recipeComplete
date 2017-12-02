@@ -1,21 +1,14 @@
 import { combineReducers } from 'redux'
 
-import { ADD_RECIPE, CHANGE_RECIPE_NAME, ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT, CHANGE_RECIPE_STEP } from '../actions/recipe.type'
+import { ADD_RECIPE_SUCCESS, CHANGE_RECIPE_NAME, ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT, CHANGE_RECIPE_STEP } from '../actions/recipe.type'
 
-export function recipes (state = {}, action) {
-  var result
+export function recipes (state = [], action) {
   switch (action.type) {
-    case ADD_RECIPE:
-
-      result = Object.assign({}, state, {
-        recipes: state.recipes.push(action.payload.newRecipe)
-      })
-      break
+    case ADD_RECIPE_SUCCESS:
+      return [...state, action.payload]
     default:
-      result = state
-      break
+      return state
   }
-  return result
 }
 
 function steps (state = [], { type, payload }) {
@@ -25,6 +18,8 @@ function steps (state = [], { type, payload }) {
     case CHANGE_RECIPE_STEP:
       const { index, step } = payload
       return [...state.slice(0, index), step, ...state.slice(index + 1)]
+    case ADD_RECIPE_SUCCESS:
+      return []
     default:
       return state
   }
@@ -49,6 +44,8 @@ function products (state = [baseCompleteProduct], { type, payload }) {
     case CHANGE_RECIPE_PRODUCT_UNIT:
       const { unitId } = payload
       return assignElemAt(state, { unitId }, payload.index)
+    case ADD_RECIPE_SUCCESS:
+      return [baseCompleteProduct]
     default:
       return state
   }
@@ -67,6 +64,8 @@ function title (state = '', { type, payload }) {
   switch (type) {
     case CHANGE_RECIPE_NAME:
       return payload
+    case ADD_RECIPE_SUCCESS:
+      return ''
     default:
       return state
   }
