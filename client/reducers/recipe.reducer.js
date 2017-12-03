@@ -1,11 +1,22 @@
 import { combineReducers } from 'redux'
 
-import { ADD_RECIPE_SUCCESS, CHANGE_RECIPE_NAME, ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT, CHANGE_RECIPE_STEP } from '../actions/recipe.type'
+import { ADD_RECIPE_SUCCESS, CHANGE_RECIPE_NAME,
+  ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT,
+  CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT,
+  CHANGE_RECIPE_STEP, GET_ALL_RECIPES_SUCCESS, GET_RECIPE_SUCCESS } from '../actions/recipe.type'
+
+export function selectedRecipe (state = '', action) {
+  return action.type === GET_RECIPE_SUCCESS
+    ? action.payload
+    : state
+}
 
 export function recipes (state = [], action) {
   switch (action.type) {
     case ADD_RECIPE_SUCCESS:
       return [...state, action.payload]
+    case GET_ALL_RECIPES_SUCCESS:
+      return action.payload
     default:
       return state
   }

@@ -6,7 +6,7 @@ const send = require('koa-send')
 const path = require('path')
 
 async function getAll (ctx, next) {
-  ctx.body = await Model.find({})
+  ctx.body = await Model.find({}, { title: true })
 }
 
 async function home (ctx, next) {
@@ -30,7 +30,7 @@ async function add (ctx, next) {
   ctx.body = newRecipe
 }
 
-const mainRoutes = ['categories', 'addProduct', 'products', 'addRecipe']
+const mainRoutes = ['categories', 'addProduct', 'products', 'addRecipe', 'recipesList']
 async function homeSpecific (ctx, next) {
   const action = ctx.params.action
   if (mainRoutes.some(ac => ac === action)) {

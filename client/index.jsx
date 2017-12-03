@@ -8,6 +8,7 @@ import { ConnectedRecipeCategoryProductListForm } from './component/category-pro
 import { ConnectedRecipeAddProduct } from './component/product.form'
 import { ConnectedProductsList } from './component/product-list'
 import { ConnectedRecipeAddForm } from './component/recipe.form'
+import { ConnectedRecipeList } from './component/recipe-list'
 import { Header } from './header'
 
 // import {RecipeResumeList} from './component/recipeResumesList'
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path="/addProduct" component={ConnectedRecipeAddProduct}/>
         <Route path="/products" component={ConnectedProductsList}/>
         <Route path="/addRecipe" component={ConnectedRecipeAddForm}/>
+        <Route path="/recipesList" component={ConnectedRecipeList}/>
       </div>
     </Router>
   </Provider>,
