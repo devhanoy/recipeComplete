@@ -9,6 +9,7 @@ import { ConnectedRecipeAddProduct } from './component/product.form'
 import { ConnectedProductsList } from './component/product-list'
 import { ConnectedRecipeAddForm } from './component/recipe.form'
 import { ConnectedRecipeList } from './component/recipe-list'
+import { ConnectedRecipeComplete } from './component/recipe-complete'
 import { Header } from './header'
 
 // import {RecipeResumeList} from './component/recipeResumesList'
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Route path="/products" component={ConnectedProductsList}/>
         <Route path="/addRecipe" component={ConnectedRecipeAddForm}/>
         <Route path="/recipesList" component={ConnectedRecipeList}/>
+        <Route path="/recipeDetail/:recipeId" component={ConnectedRecipeComplete}/>
       </div>
     </Router>
   </Provider>,

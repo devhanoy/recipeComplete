@@ -2,6 +2,7 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { getAllRecipes } from '../actions/recipe.action'
 
@@ -15,7 +16,7 @@ export class RecipeList extends React.Component {
       <div>
         <ul>
           {this.props.recipes.map(recipe => (
-            <li key={recipe._id}>{recipe.title}</li>
+            <li key={recipe._id}><Link to={`/recipeDetail/${recipe._id}`}>{recipe.title}</Link></li>
           ))}
         </ul>
       </div>
