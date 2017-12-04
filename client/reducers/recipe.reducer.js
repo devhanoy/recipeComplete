@@ -5,7 +5,7 @@ import { ADD_RECIPE_SUCCESS, CHANGE_RECIPE_NAME,
   CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT,
   CHANGE_RECIPE_STEP, GET_ALL_RECIPES_SUCCESS, GET_RECIPE_SUCCESS } from '../actions/recipe.type'
 
-export function selectedRecipe (state = '', action) {
+export function selectedRecipe (state = {}, action) {
   return action.type === GET_RECIPE_SUCCESS
     ? action.payload
     : state

@@ -32,7 +32,11 @@ async function getById (ctx, next) {
       unit
     }
   })
-  ctx.body = Object.assign({}, recipe, { products: filledProducts })
+  ctx.body = {
+    title: recipe.title,
+    steps: recipe.steps,
+    products: filledProducts
+  }
 }
 
 async function delById (ctx, next) {
