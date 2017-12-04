@@ -1,6 +1,8 @@
 'use strict'
 
 const Model = require('../models/recipe')
+const productModel = require('../models/product').Product
+const unitModel = require('../models/unit.model')
 const Router = require('koa-router')
 const send = require('koa-send')
 const path = require('path')
@@ -15,7 +17,22 @@ async function home (ctx, next) {
 
 async function getById (ctx, next) {
   const recipeId = ctx.params.id
-  ctx.body = await Model.findById(recipeId)
+  const recipe = await Model.findById(recipeId)
+  const productsIds = recipe.products.map(p => p.productId)
+  const unitIds = recipe.products.map(p => p.unitId)
+
+  const [products, units] = await Promise.all([productModel.find({ _id: { $in: productsIds } }), unitModel.find({ _id: { $in: unitIds } })])
+
+  const filledProducts = recipe.products.map(p => {
+    const product = products.find(mp => p.productId.equals(mp._id))
+    const unit = units.find(u => p.unitId.equals(u._id))
+    return {
+      product,
+      quantity: p.quantity,
+      unit
+    }
+  })
+  ctx.body = Object.assign({}, recipe, { products: filledProducts })
 }
 
 async function delById (ctx, next) {
