@@ -1,29 +1,36 @@
-import { ADD_PRODUCT_FAILURE, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS,
-  DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS,
+import {
+  ADD_PRODUCT_FAILURE,
+  ADD_PRODUCT_REQUEST,
+  ADD_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAILURE,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
   GET_ALL_PRODUCTS,
-  CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from './product.type'
-import {jsonPost} from '../helpers/requestHelper'
+  CHANGE_FORM_PRODUCT_CATEGORY,
+  CHANGE_FORM_PRODUCT_NAME
+} from "./product.type";
+import { jsonPost } from "../helpers/requestHelper";
 
-import { store } from '../store-creation'
+import { store } from "../store-creation";
 
-export function addProduct (dispatch) {
+export function addProduct(dispatch) {
   return () => {
-    const state = store.getState()
-    const product = state.productFormChange
-    const categories = state.categoryProduct
+    const state = store.getState();
+    const product = state.productFormChange;
+    const categories = state.categoryProduct;
 
-    const category = categories.find(cat => product.category === cat.name)
-    const newProduct = Object.assign({}, product, { categoryId: category._id })
+    const category = categories.find(cat => product.category === cat.name);
+    const newProduct = Object.assign({}, product, { categoryId: category._id });
 
-    dispatch(addProductRequest(newProduct))
+    dispatch(addProductRequest(newProduct));
 
     return jsonPost(`/recipes/product/`, newProduct)
       .then(product => dispatch(addProductSuccess(product)))
-      .catch(err => dispatch(addProductFailure(err)))
-  }
+      .catch(err => dispatch(addProductFailure(err)));
+  };
 }
 
-function addProductRequest (product) {
+function addProductRequest(product) {
   return {
     type: ADD_PRODUCT_REQUEST,
     payload: {
@@ -31,10 +38,10 @@ function addProductRequest (product) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-function addProductSuccess (product) {
+function addProductSuccess(product) {
   return {
     type: ADD_PRODUCT_SUCCESS,
     payload: {
@@ -42,10 +49,10 @@ function addProductSuccess (product) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-function addProductFailure (err) {
+function addProductFailure(err) {
   return {
     type: ADD_PRODUCT_FAILURE,
     payload: {
@@ -53,21 +60,21 @@ function addProductFailure (err) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-export function deleteProduct (dispatch) {
+export function deleteProduct(dispatch) {
   return product => {
-    dispatch(deleteProductRequest(product))
+    dispatch(deleteProductRequest(product));
 
-    return fetch(`/recipes/product/${product._id}`, { method: 'DELETE' })
+    return fetch(`/recipes/product/${product._id}`, { method: "DELETE" })
       .then(response => response.json())
       .then(product => dispatch(deleteProductRequest(product)))
-      .catch(err => deleteProductFailure(err))
-  }
+      .catch(err => deleteProductFailure(err));
+  };
 }
 
-function deleteProductRequest (product) {
+function deleteProductRequest(product) {
   return {
     type: DELETE_PRODUCT_REQUEST,
     payload: {
@@ -75,10 +82,10 @@ function deleteProductRequest (product) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-function deleteProductSuccess (product) {
+function deleteProductSuccess(product) {
   return {
     type: DELETE_PRODUCT_SUCCESS,
     payload: {
@@ -86,10 +93,10 @@ function deleteProductSuccess (product) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-function deleteProductFailure (err) {
+function deleteProductFailure(err) {
   return {
     type: DELETE_PRODUCT_FAILURE,
     payload: {
@@ -97,39 +104,41 @@ function deleteProductFailure (err) {
     },
     meta: null,
     error: null
-  }
+  };
 }
 
-export function getAllProducts (dispatch) {
+export function getAllProducts(dispatch) {
   return () => {
-    const productsList = store.getState().products
+    const productsList = store.getState().products;
     if (!productsList.length) {
-      fetch('/recipes/product/all', {method: 'GET'})
+      fetch("/recipes/product/all", { method: "GET" })
         .then(response => response.json())
-        .then(products => dispatch({
-          type: GET_ALL_PRODUCTS,
-          payload: products,
-          meta: null,
-          error: null
-        }))
+        .then(products =>
+          dispatch({
+            type: GET_ALL_PRODUCTS,
+            payload: products,
+            meta: null,
+            error: null
+          })
+        );
     }
-  }
+  };
 }
 
-export function changeFormName (dispatch) {
-  return (newName) => {
+export function changeFormName(dispatch) {
+  return newName => {
     dispatch({
       type: CHANGE_FORM_PRODUCT_NAME,
       payload: newName
-    })
-  }
+    });
+  };
 }
 
-export function changeFormCategory (dispatch) {
-  return (newCategoryName) => {
+export function changeFormCategory(dispatch) {
+  return newCategoryName => {
     dispatch({
       type: CHANGE_FORM_PRODUCT_CATEGORY,
       payload: newCategoryName
-    })
-  }
+    });
+  };
 }

@@ -1,29 +1,35 @@
-import { ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_SUCCESS, GET_ALL_PRODUCTS, CHANGE_FORM_PRODUCT_CATEGORY, CHANGE_FORM_PRODUCT_NAME } from '../actions/product.type'
+import {
+  ADD_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_SUCCESS,
+  GET_ALL_PRODUCTS,
+  CHANGE_FORM_PRODUCT_CATEGORY,
+  CHANGE_FORM_PRODUCT_NAME
+} from "../actions/product.type";
 
-export function products (state = [], action) {
+export function products(state = [], action) {
   switch (action.type) {
     case ADD_PRODUCT_SUCCESS:
-      return [...state, action.payload.product]
+      return [...state, action.payload.product];
     case DELETE_PRODUCT_SUCCESS:
-      return state.filter(p => p.id !== action.payload.product.id)
+      return state.filter(p => p.id !== action.payload.product.id);
     case GET_ALL_PRODUCTS:
-      return action.payload
+      return action.payload;
     default:
-      return state
+      return state;
   }
 }
 
-const productFormInitialState = { name: '', category: null }
+const productFormInitialState = { name: "", category: null };
 
-export function productFormChange (state = productFormInitialState, action) {
+export function productFormChange(state = productFormInitialState, action) {
   switch (action.type) {
     case ADD_PRODUCT_SUCCESS:
-      return productFormInitialState
+      return productFormInitialState;
     case CHANGE_FORM_PRODUCT_CATEGORY:
-      return Object.assign({}, state, { category: action.payload })
+      return Object.assign({}, state, { category: action.payload });
     case CHANGE_FORM_PRODUCT_NAME:
-      return Object.assign({}, state, { name: action.payload })
+      return Object.assign({}, state, { name: action.payload });
     default:
-      return state
+      return state;
   }
 }

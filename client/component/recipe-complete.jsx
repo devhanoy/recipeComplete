@@ -1,19 +1,20 @@
-import React from 'react'
+import React from "react";
 
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import { getRecipe } from '../actions/recipe.action'
+import { getRecipe } from "../actions/recipe.action";
 
 export class RecipeComplete extends React.Component {
-  componentDidMount () {
-    this.props.getRecipe(this.props.recipeId)
+  componentDidMount() {
+    this.props.getRecipe(this.props.recipeId);
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <label>title: </label>{this.props.recipe.title}
+        <label>title: </label>
+        {this.props.recipe.title}
 
         {/* <label>Products</label>
         <ul>
@@ -33,7 +34,7 @@ export class RecipeComplete extends React.Component {
           )}
         </ol> */}
       </div>
-    )
+    );
   }
 }
 
@@ -41,23 +42,23 @@ RecipeComplete.propTypes = {
   recipe: PropTypes.object,
   getRecipe: PropTypes.func,
   recipeId: PropTypes.string
-}
+};
 
 const mapStateToProps = (state, props) => {
-  console.log(props)
+  console.log(props);
   return {
     recipe: state.selectedRecipe,
     recipeId: props.match.params.recipeId
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getRecipe: getRecipe(dispatch)
-  }
-}
+  };
+};
 
 export const ConnectedRecipeComplete = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RecipeComplete)
+)(RecipeComplete);

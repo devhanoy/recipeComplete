@@ -1,18 +1,18 @@
-'use strict'
+"use strict";
 
-const connect = require('../server/helpers/mongoConnection')
-const UnitModel = require('../server/models/unit.model')
+const connect = require("../server/helpers/mongoConnection");
+const UnitModel = require("../server/models/unit.model");
 
-const baseUnits = [ 'g', 'kg', 'cuillères à soupe', 'cuillères à café', 'unité' ]
+const baseUnits = ["g", "kg", "cuillères à soupe", "cuillères à café", "unité"];
 
-execute()
+execute();
 
-async function execute () {
-  await connect.connect()
+async function execute() {
+  await connect.connect();
   const allInsert = baseUnits.map(name => {
-    const newUnit = new UnitModel({name})
-    return newUnit.save()
-  })
-  await Promise.all(allInsert)
-  console.log('units saved!!!')
+    const newUnit = new UnitModel({ name });
+    return newUnit.save();
+  });
+  await Promise.all(allInsert);
+  console.log("units saved!!!");
 }

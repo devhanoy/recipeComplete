@@ -5,11 +5,14 @@
   "scripts": {
     "start": "pm2 start ecosystem.config.json",
     "stop": "pm2 delete ecosystem.config.json",
-    "coverTest": "./node_modules/.bin/nyc --reporter=html ./node_modules/.bin/mocha --reporter spec",
+    "coverTest":
+      "./node_modules/.bin/nyc --reporter=html ./node_modules/.bin/mocha --reporter spec",
     "test": "mocha './server/**/*.spec.js' --reporter spec",
     "debug": "nodemon --inspect app.js",
-    "lint": "./node_modules/.bin/eslint --output-file ./lintResult.html --format html --fix **/*",
-    "webpack": "webpack"
+    "lint":
+      "./node_modules/.bin/eslint --output-file ./lintResult.html --format html --fix **/*",
+    "webpack": "webpack",
+    "precommit": "pretty-quick --staged"
   },
   "dependencies": {
     "chai-http": "^3.0.0",
@@ -44,17 +47,21 @@
     "babel-preset-react": "^6.16.0",
     "chai": "^4.1.2",
     "eslint": "^4.12.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "jsx-loader": "^0.13.2",
     "mocha": "^4.0.1",
     "nodemon": "^1.11.0",
     "nyc": "^11.3.0",
+    "prettier": "^1.10.2",
+    "pretty-quick": "^1.2.2",
     "redux-devtools": "^3.4.1",
     "sinon": "^4.1.2",
     "webpack": "^3.8.1",

@@ -1,84 +1,94 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 
-import { ADD_RECIPE_SUCCESS, CHANGE_RECIPE_NAME,
-  ADD_RECIPE_STEP, ADD_RECIPE_PRODUCT, CHANGE_RECIPE_PRODUCT,
-  CHANGE_RECIPE_PRODUCT_QUANTITY, CHANGE_RECIPE_PRODUCT_UNIT,
-  CHANGE_RECIPE_STEP, GET_ALL_RECIPES_SUCCESS, GET_RECIPE_SUCCESS } from '../actions/recipe.type'
+import {
+  ADD_RECIPE_SUCCESS,
+  CHANGE_RECIPE_NAME,
+  ADD_RECIPE_STEP,
+  ADD_RECIPE_PRODUCT,
+  CHANGE_RECIPE_PRODUCT,
+  CHANGE_RECIPE_PRODUCT_QUANTITY,
+  CHANGE_RECIPE_PRODUCT_UNIT,
+  CHANGE_RECIPE_STEP,
+  GET_ALL_RECIPES_SUCCESS,
+  GET_RECIPE_SUCCESS
+} from "../actions/recipe.type";
 
-export function selectedRecipe (state = {}, action) {
-  return action.type === GET_RECIPE_SUCCESS
-    ? action.payload
-    : state
+export function selectedRecipe(state = {}, action) {
+  return action.type === GET_RECIPE_SUCCESS ? action.payload : state;
 }
 
-export function recipes (state = [], action) {
+export function recipes(state = [], action) {
   switch (action.type) {
     case ADD_RECIPE_SUCCESS:
-      return [...state, action.payload]
+      return [...state, action.payload];
     case GET_ALL_RECIPES_SUCCESS:
-      return action.payload
+      return action.payload;
     default:
-      return state
+      return state;
   }
 }
 
-function steps (state = [], { type, payload }) {
+function steps(state = [], { type, payload }) {
   switch (type) {
     case ADD_RECIPE_STEP:
-      return [...state, '']
+      return [...state, ""];
     case CHANGE_RECIPE_STEP:
-      const { index, step } = payload
-      return [...state.slice(0, index), step, ...state.slice(index + 1)]
+      const { index, step } = payload;
+      return [...state.slice(0, index), step, ...state.slice(index + 1)];
     case ADD_RECIPE_SUCCESS:
-      return []
+      return [];
     default:
-      return state
+      return state;
   }
 }
 
-const baseProduct = { name: '' }
+const baseProduct = { name: "" };
 const baseCompleteProduct = {
   product: baseProduct,
-  quantity: '',
-  unitId: ''
-}
-function products (state = [baseCompleteProduct], { type, payload }) {
+  quantity: "",
+  unitId: ""
+};
+function products(state = [baseCompleteProduct], { type, payload }) {
   switch (type) {
     case ADD_RECIPE_PRODUCT:
-      return [...state, baseCompleteProduct]
+      return [...state, baseCompleteProduct];
     case CHANGE_RECIPE_PRODUCT:
-      const { product } = payload
-      return assignElemAt(state, { product }, payload.index)
+      const { product } = payload;
+      return assignElemAt(state, { product }, payload.index);
     case CHANGE_RECIPE_PRODUCT_QUANTITY:
-      const { quantity } = payload
-      return assignElemAt(state, { quantity }, payload.index)
+      const { quantity } = payload;
+      return assignElemAt(state, { quantity }, payload.index);
     case CHANGE_RECIPE_PRODUCT_UNIT:
-      const { unitId } = payload
-      return assignElemAt(state, { unitId }, payload.index)
+      const { unitId } = payload;
+      return assignElemAt(state, { unitId }, payload.index);
     case ADD_RECIPE_SUCCESS:
-      return [baseCompleteProduct]
+      return [baseCompleteProduct];
     default:
-      return state
+      return state;
   }
 }
 
-function assignElemAt (previousList, newProp, index) {
-  const newElem = Object.assign({}, previousList[index], newProp)
-  return changeElemAt(previousList, newElem, index)
+function assignElemAt(previousList, newProp, index) {
+  const newElem = Object.assign({}, previousList[index], newProp);
+  return changeElemAt(previousList, newElem, index);
 }
 
-function changeElemAt (previousList, newElem, index) {
-  return [...previousList.slice(0, index), newElem, ...previousList.slice(index + 1)]
+function changeElemAt(previousList, newElem, index) {
+  return [
+    ...previousList.slice(0, index),
+    newElem,
+    ...previousList.slice(index + 1)
+  ];
 }
 
-function title (state = '', { type, payload }) {
+function title(state = "", { type, payload }) {
   switch (type) {
     case CHANGE_RECIPE_NAME:
-      return payload
+      return payload;
     case ADD_RECIPE_SUCCESS:
-      return ''
+      return "";
     default:
-      return state
+      return state;
   }
 }
 
@@ -86,4 +96,4 @@ export const recipeForm = combineReducers({
   title,
   steps,
   products
-})
+});

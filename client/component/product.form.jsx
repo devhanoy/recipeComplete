@@ -1,30 +1,48 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import { addProduct, changeFormCategory, changeFormName } from '../actions/product.action'
-import { getAllCategories } from '../actions/category-product.action'
+import {
+  addProduct,
+  changeFormCategory,
+  changeFormName
+} from "../actions/product.action";
+import { getAllCategories } from "../actions/category-product.action";
 
 export class RecipeAddProduct extends React.Component {
-  componentDidMount () {
-    this.props.getAllCategories()
+  componentDidMount() {
+    this.props.getAllCategories();
   }
 
-  render () {
+  render() {
     return (
       <form>
         <label>Nom du produit :</label>
-        <input type="text" className="pure-control-group" onChange={event => this.props.producNameChange(event.target.value)}/>
+        <input
+          type="text"
+          className="pure-control-group"
+          onChange={event => this.props.producNameChange(event.target.value)}
+        />
         <label>Catégorie du produit :</label>
-        <input list="allCategories" className="pure-control-group" onChange={event => this.props.categoryChange(event.target.value)}/>
+        <input
+          list="allCategories"
+          className="pure-control-group"
+          onChange={event => this.props.categoryChange(event.target.value)}
+        />
         <datalist id="allCategories">
-          {this.props.categories.map(category =>
-            <option key={category._id} value={category.name}></option>
-          )}
+          {this.props.categories.map(category => (
+            <option key={category._id} value={category.name} />
+          ))}
         </datalist>
-        <button className="pure-button pure-button-primary" onClick={this.props.addProduct} type="reset">Ajouter le produit</button>
+        <button
+          className="pure-button pure-button-primary"
+          onClick={this.props.addProduct}
+          type="reset"
+        >
+          Ajouter le produit
+        </button>
       </form>
-    )
+    );
   }
 }
 
@@ -34,24 +52,24 @@ RecipeAddProduct.propTypes = {
   producNameChange: PropTypes.func,
   addProduct: PropTypes.func,
   getAllCategories: PropTypes.func
-}
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     categories: state.categoryProduct
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getAllCategories: getAllCategories(dispatch),
     addProduct: addProduct(dispatch),
     categoryChange: changeFormCategory(dispatch),
     producNameChange: changeFormName(dispatch)
-  }
-}
+  };
+};
 
 export const ConnectedRecipeAddProduct = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RecipeAddProduct)
+)(RecipeAddProduct);

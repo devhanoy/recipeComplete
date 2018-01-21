@@ -1,24 +1,20 @@
 {
-    "extends": ["standard", "plugin:react/recommended"],
-    "plugins": [
-        "standard",
-        "promise",
-        "react"
-    ],
-    "env": {
-        "browser": true,
-        "node": true,
-        "mocha": true
-    },
-    "rules" : {
-        "strict" : ["off","global"],
-        "no-tabs" : 1,
-        "no-console": 1,
-        "no-mixed-spaces-and-tabs": 1
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-          "jsx": true
-        }
+  "extends": ["standard", "plugin:react/recommended", "prettier"],
+  "plugins": ["standard", "promise", "react"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "strict": ["off", "global"],
+    "no-tabs": 1,
+    "no-console": 1,
+    "no-mixed-spaces-and-tabs": 1
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     }
+  }
 }
