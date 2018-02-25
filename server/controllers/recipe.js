@@ -61,7 +61,8 @@ const mainRoutes = [
   "addProduct",
   "products",
   "addRecipe",
-  "recipesList"
+  "recipesList",
+  "recipeDetail"
 ];
 async function homeSpecific(ctx, next) {
   const action = ctx.params.action;
@@ -79,5 +80,6 @@ router.get("/recipe/:id", getById);
 router.post("/recipe/add", add);
 router.get("/", home);
 router.get("/:action", homeSpecific);
+router.get("/:action/:id", homeSpecific);
 
 module.exports.router = router;

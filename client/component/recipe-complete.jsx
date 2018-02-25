@@ -13,26 +13,34 @@ export class RecipeComplete extends React.Component {
   render() {
     return (
       <div>
-        <label>title: </label>
-        {this.props.recipe.title}
-
-        {/* <label>Products</label>
-        <ul>
-          {this.props.recipe.products.map((product, index) =>
-            <li key={index}>
-              {product.product.name}
-              {product.quantity}
-              {product.unit.name}
-            </li>
-          )}
-        </ul>
-
-        <label>Steps :</label>
-        <ol>
-          {this.props.recipe.steps.map((step, index) =>
-            <li key={index}>{step}</li>
-          )}
-        </ol> */}
+        <div>
+          <label>Title: </label>
+          {this.props.recipe.title}
+        </div>
+        <div>
+          <label>Products :</label>
+          <ul>
+            {this.props.recipe.products &&
+              this.props.recipe.products.map(
+                ({ product, quantity, unit }, index) => (
+                  <li key={index}>
+                    {quantity && quantity + " "}
+                    {unit && unit.name && unit.name + " "}
+                    {product && product.name}
+                  </li>
+                )
+              )}
+          </ul>
+        </div>
+        <div>
+          <label>Steps :</label>
+          <ol>
+            {this.props.recipe.steps &&
+              this.props.recipe.steps.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+          </ol>
+        </div>
       </div>
     );
   }
