@@ -10,7 +10,9 @@ import {
   CHANGE_RECIPE_PRODUCT_UNIT,
   CHANGE_RECIPE_STEP,
   GET_ALL_RECIPES_SUCCESS,
-  GET_RECIPE_SUCCESS
+  GET_RECIPE_SUCCESS,
+  CHANGE_RECIPE_CATEGORY,
+  CHANGE_RECIPE_NB_PERSONS
 } from "../actions/recipe.type";
 
 export function selectedRecipe(state = {}, action) {
@@ -92,8 +94,32 @@ function title(state = "", { type, payload }) {
   }
 }
 
+function category(state = "", { type, payload }) {
+  switch (type) {
+    case CHANGE_RECIPE_CATEGORY:
+      return payload;
+    case ADD_RECIPE_SUCCESS:
+      return "";
+    default:
+      return state;
+  }
+}
+
+function nbPersons(state = "", { type, payload }) {
+  switch (type) {
+    case CHANGE_RECIPE_NB_PERSONS:
+      return payload;
+    case ADD_RECIPE_SUCCESS:
+      return "";
+    default:
+      return state;
+  }
+}
+
 export const recipeForm = combineReducers({
   title,
   steps,
-  products
+  products,
+  category,
+  nbPersons
 });

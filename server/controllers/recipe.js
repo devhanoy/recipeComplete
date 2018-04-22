@@ -40,7 +40,9 @@ async function getById(ctx, next) {
   ctx.body = {
     title: recipe.title,
     steps: recipe.steps,
-    products: filledProducts
+    products: filledProducts,
+    category: recipe.category,
+    nbPersons: recipe.nbPersons
   };
 }
 

@@ -10,6 +10,7 @@ const recipeSchema = new Schema({
   products: [{ productId: ObjectId, quantity: Number, unitId: ObjectId }],
   steps: [String],
   category: String,
+  nbPersons: Number,
   test: Boolean
 });
 

@@ -12,6 +12,8 @@ import {
   ADD_RECIPE_PRODUCT,
   ADD_RECIPE_STEP,
   CHANGE_RECIPE_NAME,
+  CHANGE_RECIPE_CATEGORY,
+  CHANGE_RECIPE_NB_PERSONS,
   CHANGE_RECIPE_PRODUCT,
   CHANGE_RECIPE_STEP,
   CHANGE_RECIPE_PRODUCT_QUANTITY,
@@ -160,6 +162,22 @@ export function changeName(dispatch) {
     dispatch({
       type: CHANGE_RECIPE_NAME,
       payload: name
+    });
+}
+
+export function changeCategory(dispatch) {
+  return category =>
+    dispatch({
+      type: CHANGE_RECIPE_CATEGORY,
+      payload: category
+    });
+}
+
+export function changeNbPersons(dispatch) {
+  return nbPersons =>
+    dispatch({
+      type: CHANGE_RECIPE_NB_PERSONS,
+      payload: nbPersons
     });
 }
 

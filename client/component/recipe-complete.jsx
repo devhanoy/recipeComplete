@@ -18,6 +18,14 @@ export class RecipeComplete extends React.Component {
           {this.props.recipe.title}
         </div>
         <div>
+          <label>Catégorie: </label>
+          {this.props.recipe.category}
+        </div>
+        <div>
+          <label>Nombre personnes: </label>
+          {this.props.recipe.nbPersons}
+        </div>
+        <div>
           <label>Products :</label>
           <ul>
             {this.props.recipe.products &&

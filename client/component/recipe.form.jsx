@@ -5,6 +5,8 @@ import {
   addRecipe,
   addProduct,
   changeName,
+  changeCategory,
+  changeNbPersons,
   changeProduct,
   changeQuantity,
   changeUnit,
@@ -31,6 +33,24 @@ export class RecipeAddForm extends React.Component {
             placeholder="Titre recette"
             onChange={event => this.props.titleChange(event.target.value)}
             value={this.props.title}
+          />
+        </div>
+        <div className="pure-control-group">
+          <label>Catégorie</label>
+          <input
+            type="text"
+            placeholder="Catégorie recette"
+            onChange={event => this.props.categoryChange(event.target.value)}
+            value={this.props.category}
+          />
+        </div>
+        <div className="pure-control-group">
+          <label>Nombre personnes</label>
+          <input
+            type="number"
+            placeholder="Nombre personnes recette"
+            onChange={event => this.props.nbPersonsChange(event.target.value)}
+            value={this.props.nbPersons}
           />
         </div>
 
@@ -129,6 +149,8 @@ export class RecipeAddForm extends React.Component {
 
 RecipeAddForm.propTypes = {
   title: PropTypes.string,
+  nbPersons: PropTypes.number,
+  category: PropTypes.string,
   products: PropTypes.array,
   steps: PropTypes.array,
   allProducts: PropTypes.array,
@@ -136,6 +158,8 @@ RecipeAddForm.propTypes = {
   allUnits: PropTypes.array,
   getAllUnits: PropTypes.func,
   titleChange: PropTypes.func,
+  categoryChange: PropTypes.func,
+  nbPersonsChange: PropTypes.func,
   productChange: PropTypes.func,
   productQuantityChange: PropTypes.func,
   productUnitChange: PropTypes.func,
@@ -150,6 +174,8 @@ const mapStateToProps = state => {
     products: state.recipeForm.products,
     title: state.recipeForm.title,
     steps: state.recipeForm.steps,
+    nbPersons: state.recipeForm.nbPersons,
+    category: state.recipeForm.category,
     allProducts: state.products,
     allUnits: state.units
   };
@@ -159,6 +185,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllProducts: getAllProducts(dispatch),
     titleChange: changeName(dispatch),
+    categoryChange: changeCategory(dispatch),
+    nbPersonsChange: changeNbPersons(dispatch),
     productChange: changeProduct(dispatch),
     addRecipe: addRecipe(dispatch),
     addProduct: addProduct(dispatch),
