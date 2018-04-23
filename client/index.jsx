@@ -20,7 +20,11 @@ ReactDOM.render(
     <Router basename="/recipes">
       <div>
         <Header />
-        <Route exact path="/" component={ConnectedAddCategoryProductForm} />
+        <Route
+          exact
+          path="/category/add"
+          component={ConnectedAddCategoryProductForm}
+        />
         <Route
           path="/categories"
           component={ConnectedRecipeCategoryProductListForm}
