@@ -10,7 +10,6 @@ node_modules
 .nyc_output
 coverage
 
-public/scripts/jsx/*
-public/scripts/jsx/index.js
+public/*
 
 mongoLaunch.cmd

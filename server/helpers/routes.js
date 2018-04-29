@@ -8,18 +8,20 @@ const send = require("koa-send");
 const path = require("path");
 const { verifyUser } = require("./auth.service");
 
+const root = path.join(__dirname, "..", "..", "public");
+
 const router = new Router();
 
 async function getLogin(ctx, next) {
-  await send(ctx, path.join("views", "pages", "login.html"), {
-    root: path.join(__dirname, "..")
+  await send(ctx, "login.html", {
+    root
   });
   // await this.render("login", { title: "Login" });
 }
 
 async function home(ctx, next) {
-  await send(ctx, path.join("views", "pages", "index.html"), {
-    root: path.join(__dirname, "..")
+  await send(ctx, "recipes.html", {
+    root
   });
 }
 

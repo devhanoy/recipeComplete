@@ -5,6 +5,8 @@ async function verifyUser(ctx, next) {
     const token = ctx.request.headers.authorization.substring(7);
     const decodedToken = await verify(token);
     ctx.request.user = decodedToken;
+    // console.log('here');
+    // console.log('decodedToken', decodedToken);
     await next();
   } catch (err) {
     ctx.redirect("/login");

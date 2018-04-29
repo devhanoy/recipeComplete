@@ -3,40 +3,15 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
-const links1 = [
-  {
-    path: "/addRecipe",
-    name: "Ajout de recette"
-  },
-  {
-    path: "/recipesList",
-    name: "Liste de recettes"
-  }
-];
+import "./header.less";
+import "./other.less";
 
-const links2 = [
-  {
-    path: "/category/add",
-    name: "Ajout de catégorie"
-  },
-  {
-    path: "/categories",
-    name: "Liste de catégories"
-  },
-  {
-    path: "/addProduct",
-    name: "Ajout de produits"
-  },
-  {
-    path: "/products",
-    name: "Liste des produits"
-  }
-];
+const params = require("./header-data.json");
 
-const DropDownLink = ({ links }) => (
+const DropDownLink = ({ title, links }) => (
   <li className="dropdown">
     <a href="javascript:void(0)" className="dropbtn">
-      Recettes
+      {title}
     </a>
     <div className="dropdown-content">
       {links.map(({ path, name }) => (
@@ -49,14 +24,16 @@ const DropDownLink = ({ links }) => (
 );
 
 DropDownLink.propTypes = {
-  links: PropTypes.array
+  links: PropTypes.array,
+  title: PropTypes.string
 };
 
 export const Header = () => (
   <nav className="top-menu">
     <ul>
-      <DropDownLink links={links1} />
-      <DropDownLink links={links2} />
+      {params.map(({ title, links }) => (
+        <DropDownLink key={title} links={links} title={title} />
+      ))}
     </ul>
   </nav>
 );

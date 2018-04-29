@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Recettes",
+    "links": [
+      {
+        "path": "/addRecipe",
+        "name": "Ajout de recette"
+      },
+      {
+        "path": "/recipesList",
+        "name": "Liste de recettes"
+      }
+    ]
+  },
+  {
+    "title": "Référentiels",
+    "links": [
+      {
+        "path": "/category/add",
+        "name": "Ajout de catégorie"
+      },
+      {
+        "path": "/categories",
+        "name": "Liste de catégories"
+      },
+      {
+        "path": "/addProduct",
+        "name": "Ajout de produits"
+      },
+      {
+        "path": "/products",
+        "name": "Liste des produits"
+      }
+    ]
+  }
+]
