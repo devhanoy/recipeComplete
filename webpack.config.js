@@ -4,8 +4,8 @@ var webpack = require("webpack");
 module.exports = {
   context: path.join(__dirname, "./"),
   entry: {
-    index: "./client/index" /*,
-		index2 : "./index2" */
+    index: "./client/index",
+    login: "./client/login"
   },
   output: {
     path: path.join(__dirname, "public", "scripts", "jsx"),

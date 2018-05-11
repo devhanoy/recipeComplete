@@ -8,7 +8,7 @@ import {
   CHANGE_NAME_FORM_CATEGORY,
   GET_ALL_CATEGORY_PRODUCT
 } from "./category-product.type";
-import { jsonPost } from "../helpers/requestHelper";
+import { jsonPost, del, get } from "../helpers/requestHelper";
 
 import { store } from "../store-creation";
 
@@ -17,7 +17,7 @@ export function addCategoryProduct(dispatch) {
     const categoryproduct = store.getState().categoryProductFormName;
     dispatch(addCategoryProductRequest(categoryproduct));
 
-    return jsonPost(`/recipes/categoryProduct/add`, { categoryproduct })
+    return jsonPost(`/api/recipes/categoryProduct/add`, { categoryproduct })
       .then(categoryproduct =>
         dispatch(addCategoryProductSuccess(categoryproduct))
       )
@@ -62,10 +62,7 @@ export function deleteCategoryProduct(dispatch) {
   return categoryproduct => {
     dispatch(deleteCategoryProductRequest(categoryproduct));
 
-    return fetch(`/recipes/categoryProduct/${categoryproduct._id}`, {
-      method: "DELETE"
-    })
-      .then(response => response.json())
+    return del(`/api/recipes/categoryProduct/${categoryproduct._id}`)
       .then(categoryproduct =>
         dispatch(deleteCategoryProductSuccess(categoryproduct))
       )
@@ -121,16 +118,14 @@ export function getAllCategories(dispatch) {
   return () => {
     const categoryProductList = store.getState().categoryProduct;
     if (!categoryProductList.length) {
-      fetch("/recipes/categoryProduct/all", { method: "GET" })
-        .then(response => response.json())
-        .then(categories =>
-          dispatch({
-            type: GET_ALL_CATEGORY_PRODUCT,
-            payload: categories,
-            meta: null,
-            error: null
-          })
-        );
+      get("/api/recipes/categoryProduct/all").then(categories =>
+        dispatch({
+          type: GET_ALL_CATEGORY_PRODUCT,
+          payload: categories,
+          meta: null,
+          error: null
+        })
+      );
     }
   };
 }

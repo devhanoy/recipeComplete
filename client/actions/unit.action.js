@@ -5,6 +5,7 @@ import {
 } from "./unit.type";
 
 import { store } from "../store-creation";
+import { get } from "../helpers/requestHelper";
 
 export function getAllUnits(dispatch) {
   return () => {
@@ -13,8 +14,7 @@ export function getAllUnits(dispatch) {
       return;
     }
     dispatch({ type: GET_ALL_UNIT_REQUEST });
-    fetch("/recipes/units/all", { method: "GET" })
-      .then(response => response.json())
+    get("/api/recipes/units/all")
       .then(units =>
         dispatch({
           type: GET_ALL_UNIT_SUCCESS,

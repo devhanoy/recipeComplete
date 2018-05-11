@@ -5,19 +5,30 @@ const Router = require("koa-router");
 const logger = require("../helpers/logger").logger;
 const parser = require("co-body");
 
-async function getLogin(ctx, next) {
-  await this.render("login", { title: "Login" });
-}
+const { createToken } = require("../helpers/auth.service");
 
 async function postLogin(ctx, next) {
-  let body = parser.form(ctx.request);
+  const { username, password } = ctx.request.body;
 
-  let success = await dao.checkUser(body.login, body.password);
+  // const success = await dao.checkUser(username, password);
+
+  const success = username === "admin" && password === "admin";
 
   const verb = success ? "successed" : "failed";
-  logger.log("info", `User ${body.login} ${verb} to log in`);
+  logger.log("info", `User ${username} ${verb} to log in`);
 
-  await this.render("login", { title: "Login" });
+  ctx.response.status = success ? 202 : 401;
+  if (success) {
+    const token = createToken({
+      authorized: true,
+      username
+    });
+    ctx.body = { token };
+  } else {
+    ctx.body = "Fuck!";
+  }
+
+  // await this.render("login", { title: "Login" });
 }
 
 async function getSignin(ctx, next) {
@@ -36,7 +47,6 @@ async function postSignin(ctx, next) {
 }
 
 const router = new Router();
-router.get("/login", getLogin);
 router.post("/login", postLogin);
 router.get("/signin", getSignin);
 router.post("/signin", postSignin);

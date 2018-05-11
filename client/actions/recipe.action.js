@@ -21,7 +21,7 @@ import {
   ADD_RECIPE_SUCCESS
 } from "./recipe.type";
 import { store } from "../store-creation";
-import { jsonPost } from "../helpers/requestHelper";
+import { jsonPost, get, del } from "../helpers/requestHelper";
 
 export function addRecipe(dispatch) {
   return () => {
@@ -32,7 +32,7 @@ export function addRecipe(dispatch) {
       unitId: p.unitId || null
     }));
     const nRecipes = Object.assign({}, recipe, { products });
-    jsonPost("/recipes/recipe/add", nRecipes).then(recipe => {
+    jsonPost("api/recipes/recipe/add", nRecipes).then(recipe => {
       dispatch({
         type: ADD_RECIPE_SUCCESS,
         payload: recipe
@@ -86,8 +86,7 @@ export function deleteRecipe(dispatch) {
   return recipeId => {
     dispatch(deleteRecipeRequest(recipeId));
 
-    return fetch(`/recipes/recipe/${recipeId}`, { method: "DELETE" })
-      .then(response => response.json())
+    return del(`/api/recipes/recipe/${recipeId}`)
       .then(recipe => dispatch(deleteRecipeSuccess(recipeId)))
       .catch(err => deleteRecipeFailure(err));
   };
@@ -186,8 +185,7 @@ export const getRecipe = dispatch => recipeId => {
     type: GET_RECIPE_REQUEST
   });
 
-  return fetch(`/recipes/recipe/${recipeId}`)
-    .then(response => response.json())
+  return get(`/api/recipes/recipe/${recipeId}`)
     .then(recipe =>
       dispatch({
         type: GET_RECIPE_SUCCESS,
@@ -207,8 +205,7 @@ export const getAllRecipes = dispatch => () => {
     type: GET_ALL_RECIPES_REQUEST
   });
 
-  return fetch(`/recipes/all`)
-    .then(response => response.json())
+  return get(`/api/recipes/all`)
     .then(recipes =>
       dispatch({
         type: GET_ALL_RECIPES_SUCCESS,
