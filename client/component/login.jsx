@@ -24,6 +24,7 @@ export function LoginForm(props) {
               name="login"
               type="text"
               placeholder="Nom d'utilisateur"
+              value={props.username}
               onChange={event => props.changeUsername(event.target.value)}
             />
           </div>
@@ -46,6 +47,7 @@ export function LoginForm(props) {
               Login
             </button>
           </div>
+          {props.error && <div>{props.error}</div>}
         </fieldset>
       </form>
     </section>
@@ -55,11 +57,16 @@ export function LoginForm(props) {
 LoginForm.propTypes = {
   login: PropTypes.func,
   changeUsername: PropTypes.func,
-  changePassword: PropTypes.func
+  changePassword: PropTypes.func,
+  username: PropTypes.string,
+  error: PropTypes.string
 };
 
-const mapStateToProps = state => {
-  return {};
+const mapStateToProps = ({ username, error }) => {
+  return {
+    username,
+    error
+  };
 };
 
 const mapDispatchToProps = dispatch => {

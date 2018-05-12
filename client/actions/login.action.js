@@ -3,6 +3,8 @@ import { store } from "../login-store";
 export const DO_LOGIN = "DO_LOGIN";
 export const CHANGE_USERNAME = "CHANGE_USERNAME";
 export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export function doLogin(dispatch) {
   return () => {
@@ -22,6 +24,11 @@ export function doLogin(dispatch) {
       .then(response => response.json())
       .then(({ token }) => {
         window.localStorage.setItem("token", token);
+        dispatch({ type: LOGIN_SUCCESS });
+        window.location = "recipes";
+      })
+      .catch(() => {
+        dispatch({ type: LOGIN_FAIL });
       });
   };
 }
